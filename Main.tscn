@@ -1,0 +1,564 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://districts/ResidentialDistrict.gd" type="Script" id=2]
+[ext_resource path="res://hud/ResourceLabel.gd" type="Script" id=3]
+[ext_resource path="res://districts/MedicalDistrict.gd" type="Script" id=4]
+[ext_resource path="res://districts/CommerceDistrict.gd" type="Script" id=5]
+[ext_resource path="res://districts/AgricultureDistrict.gd" type="Script" id=6]
+[ext_resource path="res://districts/GovernmentDistrict.gd" type="Script" id=7]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="ResidentialDistrict" type="Node2D" parent="Map"]
+position = Vector2( 445.608, 82.5664 )
+script = ExtResource( 2 )
+
+[node name="Button" type="Button" parent="Map/ResidentialDistrict"]
+margin_right = 12.0
+margin_bottom = 20.0
+text = "Residential"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="PopupPanel" parent="Map/ResidentialDistrict"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.5
+margin_top = -83.5
+margin_right = 128.5
+margin_bottom = 83.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/ResidentialDistrict/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Map/ResidentialDistrict/Popup/VBoxContainer"]
+margin_right = 249.0
+margin_bottom = 14.0
+text = "Residential District"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/ResidentialDistrict/Popup/VBoxContainer"]
+margin_top = 18.0
+margin_right = 249.0
+margin_bottom = 86.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_right = 122.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 122.0
+margin_bottom = 20.0
+text = "Upgrade"
+
+[node name="Button2" type="Button" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 24.0
+margin_right = 122.0
+margin_bottom = 44.0
+disabled = true
+text = "Upgrade 2"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 48.0
+margin_right = 122.0
+margin_bottom = 68.0
+
+[node name="Button" type="Button" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 59.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "Path1"
+
+[node name="Button2" type="Button" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 63.0
+margin_right = 122.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "Path 2"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 126.0
+margin_right = 249.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 123.0
+margin_bottom = 20.0
+text = "Action"
+
+[node name="MedicalDistrict" type="Node2D" parent="Map"]
+position = Vector2( 145.576, 259.28 )
+script = ExtResource( 4 )
+
+[node name="Button" type="Button" parent="Map/MedicalDistrict"]
+margin_right = 12.0
+margin_bottom = 20.0
+text = "Medical"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="PopupPanel" parent="Map/MedicalDistrict"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.5
+margin_top = -83.5
+margin_right = 128.5
+margin_bottom = 83.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/MedicalDistrict/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Map/MedicalDistrict/Popup/VBoxContainer"]
+margin_right = 249.0
+margin_bottom = 14.0
+text = "Medical District"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/MedicalDistrict/Popup/VBoxContainer"]
+margin_top = 18.0
+margin_right = 249.0
+margin_bottom = 86.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_right = 122.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 122.0
+margin_bottom = 20.0
+text = "Upgrade"
+
+[node name="Button2" type="Button" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 24.0
+margin_right = 122.0
+margin_bottom = 44.0
+disabled = true
+text = "Upgrade 2"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 48.0
+margin_right = 122.0
+margin_bottom = 68.0
+
+[node name="Button" type="Button" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 59.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "Path1"
+
+[node name="Button2" type="Button" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 63.0
+margin_right = 122.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "Path 2"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 126.0
+margin_right = 249.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 123.0
+margin_bottom = 20.0
+text = "Action"
+
+[node name="CommerceDistrict" type="Node2D" parent="Map"]
+position = Vector2( 770.655, 249.048 )
+script = ExtResource( 5 )
+
+[node name="Button" type="Button" parent="Map/CommerceDistrict"]
+margin_right = 12.0
+margin_bottom = 20.0
+text = "Commerce"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="PopupPanel" parent="Map/CommerceDistrict"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.5
+margin_top = -83.5
+margin_right = 128.5
+margin_bottom = 83.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/CommerceDistrict/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Map/CommerceDistrict/Popup/VBoxContainer"]
+margin_right = 249.0
+margin_bottom = 14.0
+text = "Commerce District"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/CommerceDistrict/Popup/VBoxContainer"]
+margin_top = 18.0
+margin_right = 249.0
+margin_bottom = 86.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_right = 122.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 122.0
+margin_bottom = 20.0
+text = "Upgrade"
+
+[node name="Button2" type="Button" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 24.0
+margin_right = 122.0
+margin_bottom = 44.0
+disabled = true
+text = "Upgrade 2"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 48.0
+margin_right = 122.0
+margin_bottom = 68.0
+
+[node name="Button" type="Button" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 59.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "Path1"
+
+[node name="Button2" type="Button" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 63.0
+margin_right = 122.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "Path 2"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 126.0
+margin_right = 249.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 123.0
+margin_bottom = 20.0
+text = "Action"
+
+[node name="AgricultureDistrict" type="Node2D" parent="Map"]
+position = Vector2( 669.13, 475.482 )
+script = ExtResource( 6 )
+
+[node name="Button" type="Button" parent="Map/AgricultureDistrict"]
+margin_right = 12.0
+margin_bottom = 20.0
+text = "Agriculture"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="PopupPanel" parent="Map/AgricultureDistrict"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.5
+margin_top = -83.5
+margin_right = 128.5
+margin_bottom = 83.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Map/AgricultureDistrict/Popup/VBoxContainer"]
+margin_right = 249.0
+margin_bottom = 14.0
+text = "Agriculture District"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/AgricultureDistrict/Popup/VBoxContainer"]
+margin_top = 18.0
+margin_right = 249.0
+margin_bottom = 86.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_right = 122.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 122.0
+margin_bottom = 20.0
+text = "Upgrade"
+
+[node name="Button2" type="Button" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 24.0
+margin_right = 122.0
+margin_bottom = 44.0
+disabled = true
+text = "Upgrade 2"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 48.0
+margin_right = 122.0
+margin_bottom = 68.0
+
+[node name="Button" type="Button" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 59.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "Path1"
+
+[node name="Button2" type="Button" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 63.0
+margin_right = 122.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "Path 2"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 126.0
+margin_right = 249.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 123.0
+margin_bottom = 20.0
+text = "Action"
+
+[node name="GovernmentDistrict" type="Node2D" parent="Map"]
+position = Vector2( 301.829, 475.482 )
+script = ExtResource( 7 )
+
+[node name="Button" type="Button" parent="Map/GovernmentDistrict"]
+margin_right = 12.0
+margin_bottom = 20.0
+text = "Government"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="PopupPanel" parent="Map/GovernmentDistrict"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.5
+margin_top = -83.5
+margin_right = 128.5
+margin_bottom = 83.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Map/GovernmentDistrict/Popup/VBoxContainer"]
+margin_right = 249.0
+margin_bottom = 14.0
+text = "Government District"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer"]
+margin_top = 18.0
+margin_right = 249.0
+margin_bottom = 86.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_right = 122.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 122.0
+margin_bottom = 20.0
+text = "Upgrade"
+
+[node name="Button2" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 24.0
+margin_right = 122.0
+margin_bottom = 44.0
+disabled = true
+text = "Upgrade 2"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 48.0
+margin_right = 122.0
+margin_bottom = 68.0
+
+[node name="Button" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 59.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "Path1"
+
+[node name="Button2" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 63.0
+margin_right = 122.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "Path 2"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 126.0
+margin_right = 249.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 123.0
+margin_bottom = 20.0
+text = "Action"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Status" type="PanelContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+margin_bottom = 28.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatusContainer" type="HBoxContainer" parent="CanvasLayer/Status"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 21.0
+
+[node name="Resources" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer"]
+margin_right = 334.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Population" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources"]
+margin_right = 68.0
+margin_bottom = 14.0
+text = "Population"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+resource = "population"
+
+[node name="Money" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources"]
+margin_left = 83.0
+margin_right = 126.0
+margin_bottom = 14.0
+text = "Money"
+script = ExtResource( 3 )
+resource = "money"
+
+[node name="Food" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources"]
+margin_left = 141.0
+margin_right = 172.0
+margin_bottom = 14.0
+text = "Food"
+script = ExtResource( 3 )
+resource = "food"
+
+[node name="Infection" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer"]
+margin_left = 338.0
+margin_right = 672.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/Infection"]
+margin_right = 65.0
+margin_bottom = 14.0
+text = "Infection: "
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Status/StatusContainer/Infection"]
+margin_left = 69.0
+margin_right = 334.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Days" type="Label" parent="CanvasLayer/Status/StatusContainer"]
+margin_left = 676.0
+margin_right = 1010.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Days 1"
+align = 2
