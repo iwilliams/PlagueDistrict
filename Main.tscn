@@ -109,6 +109,16 @@ margin_right = 123.0
 margin_bottom = 20.0
 text = "Action"
 
+[node name="ProgressBar" type="ProgressBar" parent="Map/ResidentialDistrict"]
+margin_left = -16.8394
+margin_top = 31.0113
+margin_right = 103.161
+margin_bottom = 54.0113
+value = 30.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="MedicalDistrict" type="Node2D" parent="Map"]
 position = Vector2( 145.576, 259.28 )
 script = ExtResource( 4 )
@@ -216,7 +226,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Popup" type="PopupPanel" parent="Map/CommerceDistrict"]
+[node name="Popup" type="WindowDialog" parent="Map/CommerceDistrict"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -225,9 +236,8 @@ margin_left = -128.5
 margin_top = -83.5
 margin_right = 128.5
 margin_bottom = 83.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
+window_title = "Commerce District"
+resizable = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Map/CommerceDistrict/Popup"]
 anchor_right = 1.0
@@ -240,16 +250,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Map/CommerceDistrict/Popup/VBoxContainer"]
-margin_right = 249.0
-margin_bottom = 14.0
-text = "Commerce District"
-align = 1
-
 [node name="HBoxContainer" type="HBoxContainer" parent="Map/CommerceDistrict/Popup/VBoxContainer"]
-margin_top = 18.0
 margin_right = 249.0
-margin_bottom = 86.0
+margin_bottom = 68.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
 margin_right = 122.0
@@ -311,8 +314,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Popup" type="PopupPanel" parent="Map/AgricultureDistrict"]
-visible = true
+[node name="Popup" type="WindowDialog" parent="Map/AgricultureDistrict"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -321,6 +323,8 @@ margin_left = -261.0
 margin_top = -130.0
 margin_right = 261.0
 margin_bottom = 130.0
+window_title = "Agriculture District"
+resizable = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -336,21 +340,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="Map/AgricultureDistrict/Popup/Container"]
-margin_right = 514.0
-margin_bottom = 14.0
-text = "Agriculture District"
-align = 1
-
 [node name="Actions" type="HBoxContainer" parent="Map/AgricultureDistrict/Popup/Container"]
-margin_top = 18.0
 margin_right = 514.0
 margin_bottom = 252.0
 size_flags_vertical = 3
 
 [node name="Upgrades" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions"]
 margin_right = 255.0
-margin_bottom = 234.0
+margin_bottom = 252.0
 size_flags_horizontal = 3
 
 [node name="Button" type="Button" parent="Map/AgricultureDistrict/Popup/Container/Actions/Upgrades"]
@@ -388,30 +385,29 @@ text = "Path 2"
 [node name="Manage" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions"]
 margin_left = 259.0
 margin_right = 514.0
-margin_bottom = 234.0
+margin_bottom = 252.0
 size_flags_horizontal = 3
 
 [node name="Description" type="RichTextLabel" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage"]
 margin_right = 255.0
-margin_bottom = 115.0
-rect_clip_content = false
+margin_bottom = 124.0
 size_flags_vertical = 3
 text = "The Agriculture District produces food each day. Assinging more civilians to this district will increase food yield.
 
  You can also manage the population's food rations. 1 food unit will keep 10,000 people happily fed per meal."
 
 [node name="Controls" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage"]
-margin_top = 119.0
+margin_top = 128.0
 margin_right = 255.0
-margin_bottom = 234.0
+margin_bottom = 252.0
 size_flags_vertical = 3
 
 [node name="Meals" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls"]
 margin_right = 255.0
-margin_bottom = 55.0
+margin_bottom = 60.0
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Meals"]
+[node name="MealsLabel" type="Label" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Meals"]
 margin_right = 255.0
 margin_bottom = 14.0
 text = "Meals per day: 3"
@@ -426,9 +422,9 @@ tick_count = 4
 ticks_on_borders = true
 
 [node name="Ration" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls"]
-margin_top = 59.0
+margin_top = 64.0
 margin_right = 255.0
-margin_bottom = 115.0
+margin_bottom = 124.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration"]
@@ -441,7 +437,7 @@ margin_top = 18.0
 margin_right = 255.0
 margin_bottom = 42.0
 
-[node name="SpinBox" type="SpinBox" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration/HBoxContainer"]
+[node name="RationRange" type="SpinBox" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration/HBoxContainer"]
 margin_right = 125.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
@@ -469,20 +465,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Popup" type="PopupPanel" parent="Map/GovernmentDistrict"]
+[node name="Popup" type="WindowDialog" parent="Map/GovernmentDistrict"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.5
-margin_top = -83.5
-margin_right = 128.5
-margin_bottom = 83.5
+margin_left = -128.0
+margin_top = -197.0
+margin_right = 371.0
+margin_bottom = 84.0
+window_title = "Government District"
+resizable = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup"]
+[node name="VBoxContainer" type="ScrollContainer" parent="Map/GovernmentDistrict/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -493,64 +492,181 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Map/GovernmentDistrict/Popup/VBoxContainer"]
-margin_right = 249.0
-margin_bottom = 14.0
-text = "Government District"
-align = 1
-
 [node name="HBoxContainer" type="HBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer"]
-margin_top = 18.0
-margin_right = 249.0
-margin_bottom = 86.0
+margin_right = 491.0
+margin_bottom = 273.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_right = 122.0
-margin_bottom = 68.0
+margin_right = 243.0
+margin_bottom = 273.0
 size_flags_horizontal = 3
 
 [node name="Button" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
-margin_right = 122.0
+margin_right = 243.0
 margin_bottom = 20.0
 text = "Upgrade"
 
 [node name="Button2" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 24.0
-margin_right = 122.0
+margin_right = 243.0
 margin_bottom = 44.0
 disabled = true
 text = "Upgrade 2"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 48.0
-margin_right = 122.0
+margin_right = 243.0
 margin_bottom = 68.0
 
 [node name="Button" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_right = 59.0
+margin_right = 119.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path1"
 
 [node name="Button2" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_left = 63.0
-margin_right = 122.0
+margin_left = 123.0
+margin_right = 243.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path 2"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_left = 126.0
-margin_right = 249.0
-margin_bottom = 68.0
+[node name="Manage" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 247.0
+margin_right = 491.0
+margin_bottom = 273.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 123.0
+[node name="Description" type="RichTextLabel" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage"]
+margin_right = 244.0
+margin_bottom = 29.0
+size_flags_vertical = 3
+text = "Use the Government District to set what percentage of the population works in each district."
+
+[node name="Controls" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage"]
+margin_top = 33.0
+margin_right = 244.0
+margin_bottom = 273.0
+custom_constants/separation = 10
+
+[node name="Residential" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls"]
+margin_right = 244.0
+margin_bottom = 34.0
+
+[node name="Label" type="Label" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls/Residential"]
+margin_right = 244.0
+margin_bottom = 14.0
+text = "Residential District"
+
+[node name="HSlider" type="HSlider" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls/Residential"]
+margin_top = 18.0
+margin_right = 244.0
+margin_bottom = 34.0
+step = 5.0
+value = 20.0
+tick_count = 20
+ticks_on_borders = true
+
+[node name="Medical" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls"]
+margin_top = 44.0
+margin_right = 244.0
+margin_bottom = 78.0
+
+[node name="Label" type="Label" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls/Medical"]
+margin_right = 244.0
+margin_bottom = 14.0
+text = "Medical District"
+
+[node name="HSlider" type="HSlider" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls/Medical"]
+margin_top = 18.0
+margin_right = 244.0
+margin_bottom = 34.0
+step = 5.0
+value = 20.0
+tick_count = 20
+ticks_on_borders = true
+
+[node name="Commerce" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls"]
+margin_top = 88.0
+margin_right = 244.0
+margin_bottom = 122.0
+
+[node name="Label" type="Label" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls/Commerce"]
+margin_right = 244.0
+margin_bottom = 14.0
+text = "Commerce District"
+
+[node name="HSlider" type="HSlider" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls/Commerce"]
+margin_top = 18.0
+margin_right = 244.0
+margin_bottom = 34.0
+step = 5.0
+value = 20.0
+tick_count = 20
+ticks_on_borders = true
+
+[node name="Agriculture" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls"]
+margin_top = 132.0
+margin_right = 244.0
+margin_bottom = 166.0
+
+[node name="Label" type="Label" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls/Agriculture"]
+margin_right = 244.0
+margin_bottom = 14.0
+text = "Agriculture District"
+
+[node name="HSlider" type="HSlider" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls/Agriculture"]
+margin_top = 18.0
+margin_right = 244.0
+margin_bottom = 34.0
+step = 5.0
+value = 20.0
+tick_count = 20
+ticks_on_borders = true
+
+[node name="Government" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls"]
+margin_top = 176.0
+margin_right = 244.0
+margin_bottom = 210.0
+
+[node name="Label" type="Label" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls/Government"]
+margin_right = 244.0
+margin_bottom = 14.0
+text = "Government District"
+
+[node name="HSlider" type="HSlider" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls/Government"]
+margin_top = 18.0
+margin_right = 244.0
+margin_bottom = 34.0
+step = 5.0
+value = 20.0
+tick_count = 20
+ticks_on_borders = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls"]
+margin_left = 138.0
+margin_top = 220.0
+margin_right = 244.0
+margin_bottom = 240.0
+size_flags_horizontal = 8
+custom_constants/separation = 10
+
+[node name="Button" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls/HBoxContainer"]
+margin_right = 48.0
 margin_bottom = 20.0
-text = "Action"
+text = "Reset"
+
+[node name="Button2" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage/Controls/HBoxContainer"]
+margin_left = 58.0
+margin_right = 106.0
+margin_bottom = 20.0
+disabled = true
+text = "Apply"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -701,3 +817,5 @@ size_flags_horizontal = 3
 text = "Days 1"
 align = 2
 script = ExtResource( 1 )
+[connection signal="value_changed" from="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Meals/HSlider" to="Map/AgricultureDistrict" method="_on_meals_slider_value_changed"]
+[connection signal="value_changed" from="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration/HBoxContainer/RationRange" to="Map/AgricultureDistrict" method="_on_RationRange_value_changed"]

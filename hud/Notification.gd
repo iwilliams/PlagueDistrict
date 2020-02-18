@@ -1,5 +1,6 @@
 extends Control
 
+onready var globals = get_node("/root/Globals")
 export (int) var amount = 0
 
 onready var animation_player := get_node("AnimationPlayer")
@@ -8,7 +9,7 @@ onready var sign_plus = get_node("SignPlus")
 onready var value := get_node("Value")
 
 func _ready():
-  value.text = str(abs(amount))
+  value.text = globals.comma_sep(abs(amount))
   if amount > 0:
     sign_plus.visible = true
     value.add_color_override("font_color", Color(0.0, 1.0, 0.0))

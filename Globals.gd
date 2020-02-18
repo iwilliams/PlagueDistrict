@@ -12,6 +12,8 @@ signal food_change
 
 var population : int = 4000000 setget population_set
 func population_set(value) -> void:
+  value = max(value, 0)
+  emit_signal("population_change", value - population)
   population = max(value, 0)
   
 var infected_population : int setget, infected_population_get
@@ -20,19 +22,13 @@ func infected_population_get() -> int:
   
 var food : int = 3600 setget food_set
 func food_set(value: int) -> void:
-  if food < value:
-    print("Food increase", value - food)
-  if food > value:
-    print("Food decrease", value - food)
+  value = max(value, 0)
   emit_signal("food_change", value - food)
   food = value
   
 var money : int = 200 setget money_set
 func money_set(value: int) -> void:
-  if money < value:
-    print("Money increase", value - money)
-  if money > value:
-    print("Money decrease", value - money)
+  value = max(value, 0)
   emit_signal("money_change", value - money)
   money = value
 
@@ -90,3 +86,12 @@ func kill_population() -> int:
   population -= dead
   return dead
 
+func comma_sep(number: float) -> String:
+  var string = str(number)
+  var mod = string.length() % 3
+  var res = ""
+  for i in range(0, string.length()):
+    if i != 0 && i % 3 == mod:
+        res += ","
+    res += string[i]
+  return res
