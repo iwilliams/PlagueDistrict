@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://hud/DaysLabel.gd" type="Script" id=1]
 [ext_resource path="res://districts/ResidentialDistrict.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://districts/AgricultureDistrict.gd" type="Script" id=6]
 [ext_resource path="res://districts/GovernmentDistrict.gd" type="Script" id=7]
 [ext_resource path="res://PercentageBar.gd" type="Script" id=8]
+[ext_resource path="res://font_awesome_font.tres" type="DynamicFont" id=9]
 
 [node name="Main" type="Node"]
 
@@ -311,19 +312,20 @@ __meta__ = {
 }
 
 [node name="Popup" type="PopupPanel" parent="Map/AgricultureDistrict"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.5
-margin_top = -83.5
-margin_right = 128.5
-margin_bottom = 83.5
+margin_left = -261.0
+margin_top = -130.0
+margin_right = 261.0
+margin_bottom = 130.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup"]
+[node name="Container" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -334,64 +336,126 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Map/AgricultureDistrict/Popup/VBoxContainer"]
-margin_right = 249.0
+[node name="Title" type="Label" parent="Map/AgricultureDistrict/Popup/Container"]
+margin_right = 514.0
 margin_bottom = 14.0
 text = "Agriculture District"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/AgricultureDistrict/Popup/VBoxContainer"]
+[node name="Actions" type="HBoxContainer" parent="Map/AgricultureDistrict/Popup/Container"]
 margin_top = 18.0
-margin_right = 249.0
-margin_bottom = 86.0
+margin_right = 514.0
+margin_bottom = 252.0
+size_flags_vertical = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_right = 122.0
-margin_bottom = 68.0
+[node name="Upgrades" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions"]
+margin_right = 255.0
+margin_bottom = 234.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
-margin_right = 122.0
+[node name="Button" type="Button" parent="Map/AgricultureDistrict/Popup/Container/Actions/Upgrades"]
+margin_right = 255.0
 margin_bottom = 20.0
 text = "Upgrade"
 
-[node name="Button2" type="Button" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button2" type="Button" parent="Map/AgricultureDistrict/Popup/Container/Actions/Upgrades"]
 margin_top = 24.0
-margin_right = 122.0
+margin_right = 255.0
 margin_bottom = 44.0
 disabled = true
 text = "Upgrade 2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Upgrades"]
 margin_top = 48.0
-margin_right = 122.0
+margin_right = 255.0
 margin_bottom = 68.0
 
-[node name="Button" type="Button" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_right = 59.0
+[node name="Button" type="Button" parent="Map/AgricultureDistrict/Popup/Container/Actions/Upgrades/HBoxContainer"]
+margin_right = 125.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path1"
 
-[node name="Button2" type="Button" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_left = 63.0
-margin_right = 122.0
+[node name="Button2" type="Button" parent="Map/AgricultureDistrict/Popup/Container/Actions/Upgrades/HBoxContainer"]
+margin_left = 129.0
+margin_right = 255.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path 2"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_left = 126.0
-margin_right = 249.0
-margin_bottom = 68.0
+[node name="Manage" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions"]
+margin_left = 259.0
+margin_right = 514.0
+margin_bottom = 234.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/AgricultureDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 123.0
-margin_bottom = 20.0
-text = "Action"
+[node name="Description" type="RichTextLabel" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage"]
+margin_right = 255.0
+margin_bottom = 115.0
+rect_clip_content = false
+size_flags_vertical = 3
+text = "The Agriculture District produces food each day. Assinging more civilians to this district will increase food yield.
+
+ You can also manage the population's food rations. 1 food unit will keep 10,000 people happily fed per meal."
+
+[node name="Controls" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage"]
+margin_top = 119.0
+margin_right = 255.0
+margin_bottom = 234.0
+size_flags_vertical = 3
+
+[node name="Meals" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls"]
+margin_right = 255.0
+margin_bottom = 55.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Meals"]
+margin_right = 255.0
+margin_bottom = 14.0
+text = "Meals per day: 3"
+
+[node name="HSlider" type="HSlider" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Meals"]
+margin_top = 18.0
+margin_right = 255.0
+margin_bottom = 34.0
+max_value = 3.0
+value = 3.0
+tick_count = 4
+ticks_on_borders = true
+
+[node name="Ration" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls"]
+margin_top = 59.0
+margin_right = 255.0
+margin_bottom = 115.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration"]
+margin_right = 255.0
+margin_bottom = 14.0
+text = "1 Food unit feeds:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration"]
+margin_top = 18.0
+margin_right = 255.0
+margin_bottom = 42.0
+
+[node name="SpinBox" type="SpinBox" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration/HBoxContainer"]
+margin_right = 125.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+max_value = 1e+08
+value = 10000.0
+allow_greater = true
+
+[node name="Label" type="Label" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration/HBoxContainer"]
+margin_left = 129.0
+margin_top = 5.0
+margin_right = 255.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "People"
 
 [node name="GovernmentDistrict" type="Node2D" parent="Map"]
 position = Vector2( 301.829, 475.482 )
@@ -492,7 +556,7 @@ text = "Action"
 
 [node name="Status" type="PanelContainer" parent="CanvasLayer"]
 anchor_right = 1.0
-margin_bottom = 28.0
+margin_bottom = 30.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -501,65 +565,138 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1017.0
-margin_bottom = 21.0
+margin_bottom = 23.0
 
 [node name="Resources" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer"]
 margin_right = 334.0
-margin_bottom = 14.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 custom_constants/separation = 15
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Population" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources"]
-margin_right = 68.0
-margin_bottom = 14.0
-text = "Population"
+[node name="Population" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/Resources"]
+margin_right = 80.0
+margin_bottom = 16.0
+hint_tooltip = "Population"
+
+[node name="Icon" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Population"]
+margin_right = 20.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 9 )
+text = ""
+valign = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Population"]
+margin_left = 24.0
+margin_right = 80.0
+margin_bottom = 16.0
+size_flags_vertical = 1
+text = "0000000"
+valign = 1
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 resource = "population"
 
-[node name="Money" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources"]
-margin_left = 83.0
-margin_right = 126.0
-margin_bottom = 14.0
-text = "Money"
+[node name="Money" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/Resources"]
+margin_left = 95.0
+margin_right = 140.0
+margin_bottom = 16.0
+hint_tooltip = "Money"
+__meta__ = {
+"_editor_description_": "Money"
+}
+
+[node name="Icon" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Money"]
+margin_right = 9.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 9 )
+text = ""
+valign = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Money"]
+margin_left = 13.0
+margin_top = 1.0
+margin_right = 45.0
+margin_bottom = 15.0
+text = "0000"
 script = ExtResource( 3 )
 resource = "money"
 
-[node name="Food" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources"]
-margin_left = 141.0
-margin_right = 172.0
-margin_bottom = 14.0
-text = "Food"
+[node name="Food" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/Resources"]
+margin_left = 155.0
+margin_right = 204.0
+margin_bottom = 16.0
+hint_tooltip = "Food"
+__meta__ = {
+"_editor_description_": "Money"
+}
+
+[node name="Icon" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Food"]
+margin_right = 13.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 9 )
+text = ""
+valign = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Food"]
+margin_left = 17.0
+margin_top = 1.0
+margin_right = 49.0
+margin_bottom = 15.0
+text = "0000"
 script = ExtResource( 3 )
 resource = "food"
+
+[node name="Happiness" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources"]
+margin_left = 219.0
+margin_right = 235.0
+margin_bottom = 16.0
+hint_tooltip = "The population is happy"
+mouse_filter = 0
+custom_fonts/font = ExtResource( 9 )
+text = ""
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Infection" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer"]
 margin_left = 338.0
 margin_right = 672.0
-margin_bottom = 14.0
+margin_bottom = 16.0
+hint_tooltip = "Population infection"
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/Infection"]
-margin_right = 65.0
-margin_bottom = 14.0
-text = "Infection: "
+margin_right = 18.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 9 )
+text = ""
+valign = 1
 
 [node name="Percentage" type="ProgressBar" parent="CanvasLayer/Status/StatusContainer/Infection"]
-margin_left = 69.0
+margin_left = 22.0
 margin_right = 334.0
-margin_bottom = 14.0
+margin_bottom = 16.0
+mouse_filter = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 8 )
 
 [node name="Days" type="Label" parent="CanvasLayer/Status/StatusContainer"]
 margin_left = 676.0
+margin_top = 1.0
 margin_right = 1010.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 size_flags_horizontal = 3
 text = "Days 1"
 align = 2

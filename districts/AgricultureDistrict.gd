@@ -1,16 +1,17 @@
 extends "res://districts/District.gd"
 
+const HOUR_BREAKFAST = 8
+const HOUR_LUNCH = 12
+const HOUR_DINNER = 18
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export (int) var meals_per_day = 3
+export (int) var people_per_food_unit_meal = 10000
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-    pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass
+func every_hour() -> void:
+  if (meals_per_day == 3 && globals.hour == HOUR_BREAKFAST) \
+    || (meals_per_day > 0 && globals.hour == 12) \
+    || (meals_per_day > 1 && globals.hour == 18):
+    globals.food -= int(floor(globals.population/10000))
+    
+func every_day() -> void:
+  globals.food += 800
