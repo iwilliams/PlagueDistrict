@@ -19,7 +19,7 @@ func population_set(value) -> void:
 var infected_population : int setget, infected_population_get
 func infected_population_get() -> int:
   return int(ceil(population * infection_percent))
-  
+
 var food : int = 3600 setget food_set
 func food_set(value: int) -> void:
   value = max(value, 0)
@@ -43,9 +43,24 @@ var minutes : int = 0
 var days : int setget , days_get
 func days_get() -> int:
   return int(floor(float(minutes)/MINUTES_IN_DAY))
+
 var hour : int setget , hour_get
 func hour_get() -> int:
   return (minutes - (days_get()*MINUTES_IN_DAY))/60
+
+var districts : Array = [
+    "residential", 
+    "medical", 
+    "commerce",
+    "agriculture",
+    "government"
+  ]
+
+var residential_percent : float = .15
+var medical_percent : float = .15
+var commerce_percent : float = .15
+var agriculture_percent : float = .15
+var government_percent : float = .15
 
 onready var gcd : Timer = get_node("gcd")
 
@@ -63,17 +78,14 @@ func gcd_timeout() -> void:
     
 func every_minute() -> void:
   emit_signal("every_minute")
-  pass
   
 func every_hour() -> void:
   spread_infection()
   emit_signal("every_hour")
-  pass
   
 func every_day() -> void:
   kill_population()
   emit_signal("every_day")
-  pass
   
 func spread_infection() -> void:
   var total_infected = ceil(infected_population_get() + (float(infected_population_get()) * transfer_rate))

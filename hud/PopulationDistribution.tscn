@@ -2,14 +2,192 @@
 
 [ext_resource path="res://hud/PopulationDistribution.gd" type="Script" id=1]
 
-[node name="PopulationDistribution" type="HBoxContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="PopulationDistribution" type="VBoxContainer"]
+margin_right = 244.0
+margin_bottom = 240.0
+custom_constants/separation = 10
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpinBox" type="SpinBox" parent="."]
-margin_right = 74.0
-margin_bottom = 600.0
+[node name="Residential" type="VBoxContainer" parent="."]
+margin_right = 244.0
+margin_bottom = 34.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Residential"]
+margin_right = 244.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="Residential/HBoxContainer"]
+margin_right = 122.0
+margin_bottom = 14.0
+text = "Residential District"
+
+[node name="Percent" type="Label" parent="Residential/HBoxContainer"]
+margin_left = 126.0
+margin_right = 244.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "25%"
+align = 2
+
+[node name="HSlider" type="HSlider" parent="Residential"]
+margin_top = 18.0
+margin_right = 244.0
+margin_bottom = 34.0
+step = 5.0
+value = 20.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="Medical" type="VBoxContainer" parent="."]
+margin_top = 44.0
+margin_right = 244.0
+margin_bottom = 78.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Medical"]
+margin_right = 244.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="Medical/HBoxContainer"]
+margin_right = 101.0
+margin_bottom = 14.0
+text = "Medical District"
+
+[node name="Percent" type="Label" parent="Medical/HBoxContainer"]
+margin_left = 105.0
+margin_right = 244.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "25%"
+align = 2
+
+[node name="HSlider" type="HSlider" parent="Medical"]
+margin_top = 18.0
+margin_right = 244.0
+margin_bottom = 34.0
+step = 5.0
+value = 20.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="Commerce" type="VBoxContainer" parent="."]
+margin_top = 88.0
+margin_right = 244.0
+margin_bottom = 122.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Commerce"]
+margin_right = 244.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="Commerce/HBoxContainer"]
+margin_right = 121.0
+margin_bottom = 14.0
+text = "Commerce District"
+
+[node name="Percent" type="Label" parent="Commerce/HBoxContainer"]
+margin_left = 125.0
+margin_right = 244.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "25%"
+align = 2
+
+[node name="HSlider" type="HSlider" parent="Commerce"]
+margin_top = 18.0
+margin_right = 244.0
+margin_bottom = 34.0
+step = 5.0
+value = 20.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="Agriculture" type="VBoxContainer" parent="."]
+margin_top = 132.0
+margin_right = 244.0
+margin_bottom = 166.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Agriculture"]
+margin_right = 244.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="Agriculture/HBoxContainer"]
+margin_right = 121.0
+margin_bottom = 14.0
+text = "Agriculture District"
+
+[node name="Percent" type="Label" parent="Agriculture/HBoxContainer"]
+margin_left = 125.0
+margin_right = 244.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "25%"
+align = 2
+
+[node name="HSlider" type="HSlider" parent="Agriculture"]
+margin_top = 18.0
+margin_right = 244.0
+margin_bottom = 34.0
+step = 5.0
+value = 20.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="Government" type="VBoxContainer" parent="."]
+margin_top = 176.0
+margin_right = 244.0
+margin_bottom = 210.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Government"]
+margin_right = 244.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="Government/HBoxContainer"]
+margin_right = 131.0
+margin_bottom = 14.0
+text = "Government District"
+
+[node name="Percent" type="Label" parent="Government/HBoxContainer"]
+margin_left = 135.0
+margin_right = 244.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "25%"
+align = 2
+
+[node name="HSlider" type="HSlider" parent="Government"]
+margin_top = 18.0
+margin_right = 244.0
+margin_bottom = 34.0
+step = 5.0
+value = 20.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 220.0
+margin_right = 244.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="Total" type="Label" parent="HBoxContainer"]
+margin_top = 3.0
+margin_right = 128.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "Total: 100%"
+
+[node name="Reset" type="Button" parent="HBoxContainer"]
+margin_left = 138.0
+margin_right = 186.0
+margin_bottom = 20.0
+text = "Reset"
+
+[node name="Apply" type="Button" parent="HBoxContainer"]
+margin_left = 196.0
+margin_right = 244.0
+margin_bottom = 20.0
+disabled = true
+text = "Apply"
