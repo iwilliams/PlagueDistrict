@@ -703,14 +703,14 @@ hint_tooltip = "Population infection"
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/VBoxContainer/Cure"]
-margin_right = 18.0
+margin_right = 16.0
 margin_bottom = 16.0
 custom_fonts/font = ExtResource( 9 )
-text = ""
+text = ""
 valign = 1
 
 [node name="Percentage" type="ProgressBar" parent="CanvasLayer/Status/StatusContainer/VBoxContainer/Cure"]
-margin_left = 22.0
+margin_left = 20.0
 margin_right = 334.0
 margin_bottom = 16.0
 mouse_filter = 2
