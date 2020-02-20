@@ -39,6 +39,10 @@ func infection_percent_set(value) -> void:
 var mortality_rate : float = .10
 var transfer_rate : float = .25
 
+var cure_percent : float = 0.0 setget cure_percent_set
+func cure_percent_set(value) -> void:
+  cure_percent = clamp(value, 0, 1.0)
+
 var minutes : int = 0
 var days : int setget , days_get
 func days_get() -> int:

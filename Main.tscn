@@ -717,6 +717,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 8 )
+type = "cure"
 
 [node name="Days" type="Label" parent="CanvasLayer/Status/StatusContainer"]
 margin_left = 676.0
