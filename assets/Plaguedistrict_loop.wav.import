@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Plaguedistrict_loop.wav-cbfceb6bf713accbb116a33b0030b478.sample"
+
+[deps]
+
+source_file="res://assets/Plaguedistrict_loop.wav"
+dest_files=[ "res://.import/Plaguedistrict_loop.wav-cbfceb6bf713accbb116a33b0030b478.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
