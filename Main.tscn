@@ -562,11 +562,11 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1017.0
-margin_bottom = 23.0
+margin_bottom = 43.0
 
 [node name="Resources" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer"]
 margin_right = 334.0
-margin_bottom = 16.0
+margin_bottom = 36.0
 size_flags_horizontal = 3
 custom_constants/separation = 15
 __meta__ = {
@@ -575,12 +575,12 @@ __meta__ = {
 
 [node name="Population" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/Resources"]
 margin_right = 80.0
-margin_bottom = 16.0
+margin_bottom = 36.0
 hint_tooltip = "Population"
 
 [node name="Icon" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Population"]
 margin_right = 20.0
-margin_bottom = 16.0
+margin_bottom = 36.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 9 )
@@ -590,7 +590,7 @@ valign = 1
 [node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Population"]
 margin_left = 24.0
 margin_right = 80.0
-margin_bottom = 16.0
+margin_bottom = 36.0
 size_flags_vertical = 1
 text = "0000000"
 valign = 1
@@ -603,7 +603,7 @@ resource = "population"
 [node name="Money" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/Resources"]
 margin_left = 95.0
 margin_right = 140.0
-margin_bottom = 16.0
+margin_bottom = 36.0
 hint_tooltip = "Money"
 __meta__ = {
 "_editor_description_": "Money"
@@ -611,7 +611,7 @@ __meta__ = {
 
 [node name="Icon" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Money"]
 margin_right = 9.0
-margin_bottom = 16.0
+margin_bottom = 36.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 9 )
@@ -620,9 +620,9 @@ valign = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Money"]
 margin_left = 13.0
-margin_top = 1.0
+margin_top = 11.0
 margin_right = 45.0
-margin_bottom = 15.0
+margin_bottom = 25.0
 text = "0000"
 script = ExtResource( 3 )
 resource = "money"
@@ -630,7 +630,7 @@ resource = "money"
 [node name="Food" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/Resources"]
 margin_left = 155.0
 margin_right = 204.0
-margin_bottom = 16.0
+margin_bottom = 36.0
 hint_tooltip = "Food"
 __meta__ = {
 "_editor_description_": "Money"
@@ -638,7 +638,7 @@ __meta__ = {
 
 [node name="Icon" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Food"]
 margin_right = 13.0
-margin_bottom = 16.0
+margin_bottom = 36.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 9 )
@@ -647,17 +647,18 @@ valign = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Food"]
 margin_left = 17.0
-margin_top = 1.0
+margin_top = 11.0
 margin_right = 49.0
-margin_bottom = 15.0
+margin_bottom = 25.0
 text = "0000"
 script = ExtResource( 3 )
 resource = "food"
 
 [node name="Happiness" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources"]
 margin_left = 219.0
+margin_top = 10.0
 margin_right = 235.0
-margin_bottom = 16.0
+margin_bottom = 26.0
 hint_tooltip = "The population is happy"
 mouse_filter = 0
 custom_fonts/font = ExtResource( 9 )
@@ -666,21 +667,49 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Infection" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Status/StatusContainer"]
 margin_left = 338.0
 margin_right = 672.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+
+[node name="Infection" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/VBoxContainer"]
+margin_right = 334.0
 margin_bottom = 16.0
 hint_tooltip = "Population infection"
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/Infection"]
+[node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/VBoxContainer/Infection"]
 margin_right = 18.0
 margin_bottom = 16.0
 custom_fonts/font = ExtResource( 9 )
 text = ""
 valign = 1
 
-[node name="Percentage" type="ProgressBar" parent="CanvasLayer/Status/StatusContainer/Infection"]
+[node name="Percentage" type="ProgressBar" parent="CanvasLayer/Status/StatusContainer/VBoxContainer/Infection"]
+margin_left = 22.0
+margin_right = 334.0
+margin_bottom = 16.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 8 )
+
+[node name="Cure" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/VBoxContainer"]
+margin_top = 20.0
+margin_right = 334.0
+margin_bottom = 36.0
+hint_tooltip = "Population infection"
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/VBoxContainer/Cure"]
+margin_right = 18.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 9 )
+text = ""
+valign = 1
+
+[node name="Percentage" type="ProgressBar" parent="CanvasLayer/Status/StatusContainer/VBoxContainer/Cure"]
 margin_left = 22.0
 margin_right = 334.0
 margin_bottom = 16.0
@@ -691,9 +720,9 @@ script = ExtResource( 8 )
 
 [node name="Days" type="Label" parent="CanvasLayer/Status/StatusContainer"]
 margin_left = 676.0
-margin_top = 1.0
+margin_top = 11.0
 margin_right = 1010.0
-margin_bottom = 15.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 text = "Days 1"
 align = 2
