@@ -9,10 +9,13 @@ signal every_day
 signal money_change
 signal population_change
 signal food_change
+signal moral_change
 signal event
 signal can_reasing_population_change
 signal population_reasign_cost_change
 signal pause_change
+signal cost_of_money_in_food_change
+signal cost_of_food_in_money_change
 
 var population : int = 4000000 setget population_set
 func population_set(value: int) -> void:
@@ -61,7 +64,10 @@ const MORAL_HAPPY := 2.0
 const MORAL_NORMAL := 1.0
 const MORAL_SAD := 0.5
 const MORAL_DESPAIR := 0.25
-var moral := MORAL_NORMAL
+var moral := MORAL_NORMAL setget moral_set
+func moral_set(value : float) -> void:
+  moral = max(0, value)
+  emit_signal("moral_change")
 
 var minutes : int = 0
 var days : int setget , days_get
@@ -92,8 +98,15 @@ func population_reasign_cost_set(value):
   population_reasign_cost = max(0, value)
   emit_signal("population_reasign_cost_change")
 
-var cost_of_money_in_food = 100
-var cost_of_food_in_money = 100
+var cost_of_money_in_food := 100 setget cost_of_money_in_food_set
+func cost_of_money_in_food_set(value : int) -> void:
+  cost_of_money_in_food = value
+  emit_signal("cost_of_money_in_food_change")
+
+var cost_of_food_in_money := 100 setget cost_of_food_in_money_set
+func cost_of_food_in_money_set(value : int) -> void:
+  cost_of_food_in_money = value
+  emit_signal("cost_of_food_in_money_change")
 
 var residential_percent : float = .15
 var medical_percent : float = .15

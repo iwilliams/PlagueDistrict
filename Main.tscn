@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://hud/DaysLabel.gd" type="Script" id=1]
 [ext_resource path="res://districts/ResidentialDistrict.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://hud/event_panel.tres" type="StyleBox" id=18]
 [ext_resource path="res://hud/EventPopup.gd" type="Script" id=19]
 [ext_resource path="res://Map.gd" type="Script" id=20]
+[ext_resource path="res://hud/FoodExchange.gd" type="Script" id=21]
 
 [sub_resource type="Animation" id=1]
 resource_name = "spin"
@@ -324,7 +325,6 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
 script = ExtResource( 2 )
 
 [node name="Popup" type="WindowDialog" parent="Map/Residential/ResidentialDistrict"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -418,79 +418,151 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
 script = ExtResource( 5 )
 
 [node name="Popup" type="WindowDialog" parent="Map/Commerce/CommerceDistrict"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.5
-margin_top = -83.5
-margin_right = 128.5
-margin_bottom = 83.5
+margin_left = -134.0
+margin_top = -42.0
+margin_right = 161.0
+margin_bottom = 148.0
 window_title = "Commerce District"
-resizable = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer"]
-margin_right = 249.0
-margin_bottom = 68.0
+[node name="MarginContainer" type="MarginContainer" parent="Map/Commerce/CommerceDistrict/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_right = 122.0
-margin_bottom = 68.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 285.0
+margin_bottom = 180.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer"]
+visible = false
+margin_right = 116.0
+margin_bottom = 147.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
-margin_right = 122.0
+[node name="Button" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 116.0
 margin_bottom = 20.0
 text = "Upgrade"
 
-[node name="Button2" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button2" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 24.0
-margin_right = 122.0
+margin_right = 116.0
 margin_bottom = 44.0
 disabled = true
 text = "Upgrade 2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 48.0
-margin_right = 122.0
+margin_right = 116.0
 margin_bottom = 68.0
 
-[node name="Button" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_right = 59.0
+[node name="Button" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 56.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path1"
 
-[node name="Button2" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_left = 63.0
-margin_right = 122.0
+[node name="Button2" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 60.0
+margin_right = 116.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path 2"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_left = 126.0
-margin_right = 249.0
-margin_bottom = 68.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer"]
+margin_right = 275.0
+margin_bottom = 170.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 10
+alignment = 1
 
-[node name="Button" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 123.0
+[node name="Label" type="Label" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 5.0
+margin_right = 275.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+text = "Assigning citizens to the Commercel District will increase the rate at which money is produced.
+
+You can also buy food and sell food on the global market."
+autowrap = true
+
+[node name="FoodExchange" type="VBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 114.0
+margin_right = 275.0
+margin_bottom = 164.0
+custom_constants/separation = 10
+script = ExtResource( 21 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer/FoodExchange"]
+margin_right = 275.0
 margin_bottom = 20.0
-text = "Action"
+
+[node name="Label" type="Label" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer/FoodExchange/HBoxContainer"]
+margin_top = 3.0
+margin_right = 117.0
+margin_bottom = 17.0
+text = "Buy 100 food for:  "
+
+[node name="BuyPrice" type="Label" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer/FoodExchange/HBoxContainer"]
+margin_left = 121.0
+margin_top = 3.0
+margin_right = 235.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "$100"
+
+[node name="Buy" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer/FoodExchange/HBoxContainer"]
+margin_left = 239.0
+margin_right = 275.0
+margin_bottom = 20.0
+text = "Buy"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer/FoodExchange"]
+margin_top = 30.0
+margin_right = 275.0
+margin_bottom = 50.0
+
+[node name="Label" type="Label" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer/FoodExchange/HBoxContainer2"]
+margin_top = 3.0
+margin_right = 116.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "Sell 100 food for: "
+
+[node name="SellPrice" type="Label" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer/FoodExchange/HBoxContainer2"]
+margin_left = 120.0
+margin_top = 3.0
+margin_right = 236.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "$100"
+
+[node name="Sell" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer/FoodExchange/HBoxContainer2"]
+margin_left = 240.0
+margin_right = 275.0
+margin_bottom = 20.0
+text = "Sell"
 
 [node name="Agriculture" type="Spatial" parent="Map"]
 transform = Transform( -0.809017, 0, -0.587785, 0, 1, 0, 0.587785, 0, -0.809017, 0, 0, 0 )
