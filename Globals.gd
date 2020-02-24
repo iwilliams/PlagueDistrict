@@ -12,6 +12,7 @@ signal food_change
 signal event
 signal can_reasing_population_change
 signal population_reasign_cost_change
+signal pause_change
 
 var population : int = 4000000 setget population_set
 func population_set(value: int) -> void:
@@ -21,10 +22,14 @@ func population_set(value: int) -> void:
     emit_signal("population_change", diff)
   population = int(max(value, 0))
   
-var infected_population : int setget, infected_population_get
-func infected_population_get() -> int:
-  return int(ceil(population * infection_percent))
+var infected_population : int = int(population * .02) setget infected_population_set
+func infected_population_set(value : int) -> void:
+  infected_population = clamp(value, 0, population)
 
+var infection_percent : float setget, infection_percent_get
+func infection_percent_get() -> float:
+  return float(infected_population)/float(population)
+  
 var food : int = 3600 setget food_set
 func food_set(value: int) -> void:
   value = int(max(value, 0))
@@ -41,10 +46,6 @@ func money_set(value: int) -> void:
     emit_signal("money_change", diff)
   money = value
 
-var infection_percent : float = .02 setget infection_percent_set
-func infection_percent_set(value) -> void:
-  infection_percent = clamp(value, 0, 1.0)
-  
 var mortality_rate : float = .10
 var transfer_rate : float = .25
 
@@ -116,6 +117,14 @@ onready var bgm : AudioStreamPlayer = get_node("BGM")
 onready var event_chime : AudioStreamPlayer = get_node("EventChime")
 onready var click_sound : AudioStreamPlayer = get_node("ClickSound")
 
+func pause() -> void:
+  gcd.paused = true
+  emit_signal("pause_change", gcd.paused)
+  
+func resume() -> void:
+  gcd.paused = false
+  emit_signal("pause_change", gcd.paused)
+
 func _ready() -> void:
   #warning-ignore:return_value_discarded
   gcd.connect("timeout", self, "gcd_timeout")
@@ -140,10 +149,11 @@ func every_hour() -> void:
     var buff : Buff = node
     if buff:
       buff.every_hour()
-  spread_infection()
+  var hour = hour_get()
+  if hour % 4 == 0:
+    spread_infection()
+    var _dead = kill_population()
   emit_signal("every_hour")
-#  if hour_get() == 1:
-#    get_event()
 
 func every_day() -> void:
   for node in active_buffs.get_children():
@@ -156,17 +166,17 @@ func every_day() -> void:
   
 func spread_infection() -> void:
   if population > 0:
+    var adjusted_transfer_rate = transfer_rate * (1.0 - (residential_percent*.90))
     var total_infected = ceil(\
-      infected_population_get() \
-      + (float(infected_population_get()) * transfer_rate)\
+      infected_population \
+      + (float(infected_population) * adjusted_transfer_rate)\
     )
-    infection_percent_set(total_infected/population)
+    infected_population_set(total_infected)
   
 func kill_population() -> int:
-  var dead = ceil(float(infected_population_get()) * mortality_rate)
-  var new_infected_population = infected_population_get() - dead
-  infection_percent_set(new_infected_population/population)
-  population -= dead
+  var dead = ceil(float(infected_population * mortality_rate))
+  infected_population_set(infected_population - dead)
+  population_set(population - dead)
   return dead
 
 func comma_sep(number: float) -> String:

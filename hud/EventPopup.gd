@@ -19,6 +19,7 @@ func event(event : Event) -> void:
   description.text = event.description
   picture.texture = event.picture
   decline_button.visible = event.can_decline
+  Globals.pause()
   visible = true
   
 func accept():
@@ -26,9 +27,11 @@ func accept():
   var didAccept = Globals.event_accept()
   if didAccept:
     visible = false
+    Globals.resume()
   
 func decline():
   Globals.click_sound.play()
   var didDecline = Globals.event_decline()
   if didDecline:
     visible = false
+    Globals.resume()

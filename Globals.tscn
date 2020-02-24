@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Globals.gd" type="Script" id=1]
 [ext_resource path="res://assets/Plaguedistrict_loop.ogg" type="AudioStream" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://buffs/PersecutionsBuff.gd" type="Script" id=35]
 [ext_resource path="res://buffs/DoubtBuff.gd" type="Script" id=36]
 [ext_resource path="res://buffs/CorruptionBuff.gd" type="Script" id=37]
+[ext_resource path="res://events/Intro.gd" type="Script" id=38]
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
@@ -154,6 +155,12 @@ description = "The head of the food district informs you that people could be fe
 picture = ExtResource( 32 )
 
 [node name="CurrentEvents" type="Node" parent="."]
+
+[node name="Intro" type="Node" parent="CurrentEvents"]
+script = ExtResource( 38 )
+title = "Welcome to Plague District"
+description = "The year is 2080 and the black plague has returned. Your responsibility as the mayor is to manage the districts and find a cure before the epidemic wipes out the city. Allocate more people to districts in order to increase their efficiency. Things will likely not go as planned so be prepared."
+can_decline = false
 
 [node name="ExpiredEvents" type="Node" parent="."]
 

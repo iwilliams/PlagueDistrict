@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://hud/DaysLabel.gd" type="Script" id=1]
 [ext_resource path="res://districts/ResidentialDistrict.gd" type="Script" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/events/plague_doctor.jpg" type="Texture" id=17]
 [ext_resource path="res://hud/event_panel.tres" type="StyleBox" id=18]
 [ext_resource path="res://hud/EventPopup.gd" type="Script" id=19]
+[ext_resource path="res://Map.gd" type="Script" id=20]
 
 [sub_resource type="Animation" id=1]
 resource_name = "spin"
@@ -314,95 +315,109 @@ rect_min_size = Vector2( 100, 0 )
 text = "Decline"
 
 [node name="Map" type="Spatial" parent="."]
+script = ExtResource( 20 )
 
-[node name="Spatial" type="Spatial" parent="Map"]
+[node name="Residential" type="Spatial" parent="Map"]
 
-[node name="ResidentialDistrict" parent="Map/Spatial" instance=ExtResource( 13 )]
+[node name="ResidentialDistrict" parent="Map/Residential" instance=ExtResource( 13 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
 script = ExtResource( 2 )
 
-[node name="Popup" type="WindowDialog" parent="Map/Spatial/ResidentialDistrict"]
+[node name="Popup" type="WindowDialog" parent="Map/Residential/ResidentialDistrict"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.5
-margin_top = -83.5
-margin_right = 128.5
-margin_bottom = 83.5
+margin_left = -134.5
+margin_top = -48.0
+margin_right = 134.5
+margin_bottom = 48.0
 window_title = "Residential District"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/Spatial/ResidentialDistrict/Popup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer"]
-margin_right = 249.0
-margin_bottom = 68.0
+[node name="MarginContainer" type="MarginContainer" parent="Map/Residential/ResidentialDistrict/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_right = 122.0
-margin_bottom = 68.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Residential/ResidentialDistrict/Popup/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 259.0
+margin_bottom = 86.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Residential/ResidentialDistrict/Popup/MarginContainer/HBoxContainer"]
+visible = false
+margin_right = 116.0
+margin_bottom = 147.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
-margin_right = 122.0
+[node name="Button" type="Button" parent="Map/Residential/ResidentialDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 116.0
 margin_bottom = 20.0
 text = "Upgrade"
 
-[node name="Button2" type="Button" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button2" type="Button" parent="Map/Residential/ResidentialDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 24.0
-margin_right = 122.0
+margin_right = 116.0
 margin_bottom = 44.0
 disabled = true
 text = "Upgrade 2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Residential/ResidentialDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 48.0
-margin_right = 122.0
+margin_right = 116.0
 margin_bottom = 68.0
 
-[node name="Button" type="Button" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_right = 59.0
+[node name="Button" type="Button" parent="Map/Residential/ResidentialDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 56.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path1"
 
-[node name="Button2" type="Button" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_left = 63.0
-margin_right = 122.0
+[node name="Button2" type="Button" parent="Map/Residential/ResidentialDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 60.0
+margin_right = 116.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path 2"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_left = 126.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/Residential/ResidentialDistrict/Popup/MarginContainer/HBoxContainer"]
 margin_right = 249.0
-margin_bottom = 68.0
+margin_bottom = 76.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
 
-[node name="Button" type="Button" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 123.0
-margin_bottom = 20.0
-text = "Action"
+[node name="Label" type="Label" parent="Map/Residential/ResidentialDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 14.0
+margin_right = 249.0
+margin_bottom = 62.0
+size_flags_horizontal = 3
+text = "Assigning citizens to the Residential District will decrease the rate at which the infection spreads."
+autowrap = true
 
-[node name="Spatial2" type="Spatial" parent="Map"]
+[node name="Commerce" type="Spatial" parent="Map"]
 transform = Transform( 0.309017, 0, -0.951057, 0, 1, 0, 0.951057, 0, 0.309017, 0, 0, 0 )
 
-[node name="CommerceDistrict" parent="Map/Spatial2" instance=ExtResource( 16 )]
+[node name="CommerceDistrict" parent="Map/Commerce" instance=ExtResource( 16 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
 script = ExtResource( 5 )
 
-[node name="Popup" type="WindowDialog" parent="Map/Spatial2/CommerceDistrict"]
+[node name="Popup" type="WindowDialog" parent="Map/Commerce/CommerceDistrict"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -414,7 +429,7 @@ margin_bottom = 83.5
 window_title = "Commerce District"
 resizable = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/Spatial2/CommerceDistrict/Popup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -425,40 +440,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer"]
 margin_right = 249.0
 margin_bottom = 68.0
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
 margin_right = 122.0
 margin_bottom = 68.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 122.0
 margin_bottom = 20.0
 text = "Upgrade"
 
-[node name="Button2" type="Button" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button2" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 24.0
 margin_right = 122.0
 margin_bottom = 44.0
 disabled = true
 text = "Upgrade 2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 48.0
 margin_right = 122.0
 margin_bottom = 68.0
 
-[node name="Button" type="Button" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Button" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 margin_right = 59.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path1"
 
-[node name="Button2" type="Button" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Button2" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 margin_left = 63.0
 margin_right = 122.0
 margin_bottom = 20.0
@@ -466,26 +481,25 @@ size_flags_horizontal = 3
 disabled = true
 text = "Path 2"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
 margin_left = 126.0
 margin_right = 249.0
 margin_bottom = 68.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="Map/Commerce/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_right = 123.0
 margin_bottom = 20.0
 text = "Action"
 
-[node name="Spatial3" type="Spatial" parent="Map"]
+[node name="Agriculture" type="Spatial" parent="Map"]
 transform = Transform( -0.809017, 0, -0.587785, 0, 1, 0, 0.587785, 0, -0.809017, 0, 0, 0 )
 
-[node name="AgricultureDistrict" parent="Map/Spatial3" instance=ExtResource( 11 )]
+[node name="AgricultureDistrict" parent="Map/Agriculture" instance=ExtResource( 11 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
 script = ExtResource( 6 )
 
-[node name="Popup" type="WindowDialog" parent="Map/Spatial3/AgricultureDistrict"]
-visible = true
+[node name="Popup" type="WindowDialog" parent="Map/Agriculture/AgricultureDistrict"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -499,7 +513,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="Map/Spatial3/AgricultureDistrict/Popup"]
+[node name="MarginContainer" type="MarginContainer" parent="Map/Agriculture/AgricultureDistrict/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 10
@@ -510,7 +524,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Actions" type="HBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer"]
+[node name="Actions" type="HBoxContainer" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 337.0
@@ -522,37 +536,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Upgrades" type="VBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions"]
+[node name="Upgrades" type="VBoxContainer" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions"]
 visible = false
 margin_right = 252.0
 margin_bottom = 252.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades"]
+[node name="Button" type="Button" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades"]
 margin_right = 252.0
 margin_bottom = 20.0
 text = "Upgrade"
 
-[node name="Button2" type="Button" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades"]
+[node name="Button2" type="Button" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades"]
 margin_top = 24.0
 margin_right = 252.0
 margin_bottom = 44.0
 disabled = true
 text = "Upgrade 2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades"]
 margin_top = 48.0
 margin_right = 252.0
 margin_bottom = 68.0
 
-[node name="Button" type="Button" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades/HBoxContainer"]
+[node name="Button" type="Button" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades/HBoxContainer"]
 margin_right = 124.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path1"
 
-[node name="Button2" type="Button" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades/HBoxContainer"]
+[node name="Button2" type="Button" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades/HBoxContainer"]
 margin_left = 128.0
 margin_right = 252.0
 margin_bottom = 20.0
@@ -560,12 +574,12 @@ size_flags_horizontal = 3
 disabled = true
 text = "Path 2"
 
-[node name="Manage" type="VBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions"]
+[node name="Manage" type="VBoxContainer" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions"]
 margin_right = 327.0
 margin_bottom = 237.0
 size_flags_horizontal = 3
 
-[node name="Description" type="RichTextLabel" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage"]
+[node name="Description" type="RichTextLabel" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Manage"]
 margin_right = 327.0
 margin_bottom = 116.0
 size_flags_vertical = 3
@@ -573,23 +587,23 @@ text = "The Agriculture District produces food each day. Assinging more civilian
 
  You can also manage the population's food rations. 1 food unit will keep 10,000 people happily fed per meal."
 
-[node name="Controls" type="VBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage"]
+[node name="Controls" type="VBoxContainer" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Manage"]
 margin_top = 120.0
 margin_right = 327.0
 margin_bottom = 237.0
 size_flags_vertical = 3
 
-[node name="Meals" type="VBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls"]
+[node name="Meals" type="VBoxContainer" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls"]
 margin_right = 327.0
 margin_bottom = 56.0
 size_flags_vertical = 3
 
-[node name="MealsLabel" type="Label" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Meals"]
+[node name="MealsLabel" type="Label" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Meals"]
 margin_right = 327.0
 margin_bottom = 14.0
 text = "Meals per day: 3"
 
-[node name="HSlider" type="HSlider" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Meals"]
+[node name="HSlider" type="HSlider" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Meals"]
 margin_top = 18.0
 margin_right = 327.0
 margin_bottom = 34.0
@@ -598,23 +612,23 @@ value = 3.0
 tick_count = 4
 ticks_on_borders = true
 
-[node name="Ration" type="VBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls"]
+[node name="Ration" type="VBoxContainer" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls"]
 margin_top = 60.0
 margin_right = 327.0
 margin_bottom = 117.0
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Ration"]
+[node name="Label" type="Label" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Ration"]
 margin_right = 327.0
 margin_bottom = 14.0
 text = "1 Food unit feeds:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Ration"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Ration"]
 margin_top = 18.0
 margin_right = 327.0
 margin_bottom = 42.0
 
-[node name="RationRange" type="SpinBox" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Ration/HBoxContainer"]
+[node name="RationRange" type="SpinBox" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Ration/HBoxContainer"]
 margin_right = 161.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
@@ -622,7 +636,7 @@ max_value = 1e+08
 value = 10000.0
 allow_greater = true
 
-[node name="Label" type="Label" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Ration/HBoxContainer"]
+[node name="Label" type="Label" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Ration/HBoxContainer"]
 margin_left = 165.0
 margin_top = 5.0
 margin_right = 327.0
@@ -630,98 +644,107 @@ margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "People"
 
-[node name="Spatial4" type="Spatial" parent="Map"]
+[node name="Medical" type="Spatial" parent="Map"]
 transform = Transform( -0.809017, 0, 0.587786, 0, 1, 0, -0.587786, 0, -0.809017, 0, 0, 0 )
 
-[node name="MedicalDistrict" parent="Map/Spatial4" instance=ExtResource( 14 )]
+[node name="MedicalDistrict" parent="Map/Medical" instance=ExtResource( 14 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
 script = ExtResource( 4 )
 
-[node name="Popup" type="WindowDialog" parent="Map/Spatial4/MedicalDistrict"]
+[node name="Popup" type="WindowDialog" parent="Map/Medical/MedicalDistrict"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.5
-margin_top = -83.5
-margin_right = 128.5
-margin_bottom = 83.5
+margin_left = -134.5
+margin_top = -42.5
+margin_right = 134.5
+margin_bottom = 42.5
 window_title = "Medical District"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/Spatial4/MedicalDistrict/Popup"]
+[node name="MarginContainer" type="MarginContainer" parent="Map/Medical/MedicalDistrict/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer"]
-margin_right = 249.0
-margin_bottom = 68.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Medical/MedicalDistrict/Popup/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 259.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_right = 122.0
-margin_bottom = 68.0
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Medical/MedicalDistrict/Popup/MarginContainer/HBoxContainer"]
+visible = false
+margin_right = 116.0
+margin_bottom = 147.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
-margin_right = 122.0
+[node name="Button" type="Button" parent="Map/Medical/MedicalDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 116.0
 margin_bottom = 20.0
 text = "Upgrade"
 
-[node name="Button2" type="Button" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button2" type="Button" parent="Map/Medical/MedicalDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 24.0
-margin_right = 122.0
+margin_right = 116.0
 margin_bottom = 44.0
 disabled = true
 text = "Upgrade 2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Medical/MedicalDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 48.0
-margin_right = 122.0
+margin_right = 116.0
 margin_bottom = 68.0
 
-[node name="Button" type="Button" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_right = 59.0
+[node name="Button" type="Button" parent="Map/Medical/MedicalDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 56.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path1"
 
-[node name="Button2" type="Button" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_left = 63.0
-margin_right = 122.0
+[node name="Button2" type="Button" parent="Map/Medical/MedicalDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 60.0
+margin_right = 116.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path 2"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_left = 126.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/Medical/MedicalDistrict/Popup/MarginContainer/HBoxContainer"]
 margin_right = 249.0
-margin_bottom = 68.0
+margin_bottom = 65.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
 
-[node name="Button" type="Button" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 123.0
-margin_bottom = 20.0
-text = "Action"
+[node name="Label" type="Label" parent="Map/Medical/MedicalDistrict/Popup/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 8.0
+margin_right = 249.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+text = "Assigning citizens to the Medical District will increase the rate at which a cure is researched."
+autowrap = true
 
-[node name="Spatial5" type="Spatial" parent="Map"]
+[node name="Government" type="Spatial" parent="Map"]
 transform = Transform( 0.309017, 0, 0.951056, 0, 1, 0, -0.951056, 0, 0.309017, 0, 0, 0 )
 
-[node name="GovernmentDistrict" parent="Map/Spatial5" instance=ExtResource( 15 )]
+[node name="GovernmentDistrict" parent="Map/Government" instance=ExtResource( 15 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
 script = ExtResource( 7 )
 
-[node name="Popup" type="WindowDialog" parent="Map/Spatial5/GovernmentDistrict"]
+[node name="Popup" type="WindowDialog" parent="Map/Government/GovernmentDistrict"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -735,7 +758,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="MarginContainer" parent="Map/Spatial5/GovernmentDistrict/Popup"]
+[node name="VBoxContainer" type="MarginContainer" parent="Map/Government/GovernmentDistrict/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -750,7 +773,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Government/GovernmentDistrict/Popup/VBoxContainer"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 338.0
@@ -758,37 +781,37 @@ margin_bottom = 299.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Government/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
 visible = false
 margin_right = 243.0
 margin_bottom = 273.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button" type="Button" parent="Map/Government/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 243.0
 margin_bottom = 20.0
 text = "Upgrade"
 
-[node name="Button2" type="Button" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button2" type="Button" parent="Map/Government/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 24.0
 margin_right = 243.0
 margin_bottom = 44.0
 disabled = true
 text = "Upgrade 2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Government/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 48.0
 margin_right = 243.0
 margin_bottom = 68.0
 
-[node name="Button" type="Button" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Button" type="Button" parent="Map/Government/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 margin_right = 119.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path1"
 
-[node name="Button2" type="Button" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Button2" type="Button" parent="Map/Government/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 margin_left = 123.0
 margin_right = 243.0
 margin_bottom = 20.0
@@ -796,19 +819,19 @@ size_flags_horizontal = 3
 disabled = true
 text = "Path 2"
 
-[node name="Manage" type="VBoxContainer" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
+[node name="Manage" type="VBoxContainer" parent="Map/Government/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
 margin_right = 328.0
 margin_bottom = 289.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Description" type="RichTextLabel" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage"]
+[node name="Description" type="RichTextLabel" parent="Map/Government/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage"]
 margin_right = 328.0
 margin_bottom = 33.0
 size_flags_vertical = 3
 text = "Use the Government District to set what percentage of the population works in each district."
 
-[node name="PopulationDistribution" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage" instance=ExtResource( 10 )]
+[node name="PopulationDistribution" parent="Map/Government/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage" instance=ExtResource( 10 )]
 margin_top = 37.0
 margin_right = 328.0
 margin_bottom = 289.0
@@ -817,7 +840,6 @@ margin_bottom = 289.0
 environment = ExtResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Map"]
-autoplay = "spin"
 playback_speed = 0.01
 anims/spin = SubResource( 1 )
 
