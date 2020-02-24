@@ -156,7 +156,10 @@ func every_day() -> void:
   
 func spread_infection() -> void:
   if population > 0:
-    var total_infected = ceil(infected_population_get() + (float(infected_population_get()) * transfer_rate))
+    var total_infected = ceil(\
+      infected_population_get() \
+      + (float(infected_population_get()) * transfer_rate)\
+    )
     infection_percent_set(total_infected/population)
   
 func kill_population() -> int:

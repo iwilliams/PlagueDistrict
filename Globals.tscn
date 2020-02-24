@@ -42,7 +42,7 @@
 script = ExtResource( 1 )
 
 [node name="gcd" type="Timer" parent="."]
-wait_time = 0.084
+wait_time = 0.042
 autostart = true
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]

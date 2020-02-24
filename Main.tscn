@@ -485,6 +485,7 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
 script = ExtResource( 6 )
 
 [node name="Popup" type="WindowDialog" parent="Map/Spatial3/AgricultureDistrict"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -721,7 +722,6 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
 script = ExtResource( 7 )
 
 [node name="Popup" type="WindowDialog" parent="Map/Spatial5/GovernmentDistrict"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
