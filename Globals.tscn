@@ -1,7 +1,42 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Globals.gd" type="Script" id=1]
 [ext_resource path="res://assets/Plaguedistrict_loop.ogg" type="AudioStream" id=2]
+[ext_resource path="res://PlagueDoctor.gd" type="Script" id=3]
+[ext_resource path="res://assets/events/plague_doctor.jpg" type="Texture" id=4]
+[ext_resource path="res://events/ForeignAid.gd" type="Script" id=5]
+[ext_resource path="res://assets/events/foreign_aid.jpg" type="Texture" id=6]
+[ext_resource path="res://events/Lab.gd" type="Script" id=7]
+[ext_resource path="res://assets/events/lab.jpg" type="Texture" id=8]
+[ext_resource path="res://events/Doomsayer.gd" type="Script" id=9]
+[ext_resource path="res://assets/events/doomsayer.jpg" type="Texture" id=10]
+[ext_resource path="res://events/Skepticism.gd" type="Script" id=11]
+[ext_resource path="res://assets/events/skepticism.jpg" type="Texture" id=12]
+[ext_resource path="res://events/Persecutions.gd" type="Script" id=13]
+[ext_resource path="res://assets/events/persecution.jpg" type="Texture" id=14]
+[ext_resource path="res://events/Doubt.gd" type="Script" id=15]
+[ext_resource path="res://assets/events/doubt_in_the_system.jpg" type="Texture" id=16]
+[ext_resource path="res://events/Corruption.gd" type="Script" id=17]
+[ext_resource path="res://assets/events/corruption.jpg" type="Texture" id=18]
+[ext_resource path="res://events/ExtremeMeasures.gd" type="Script" id=19]
+[ext_resource path="res://assets/events/extreme_measures.jpg" type="Texture" id=20]
+[ext_resource path="res://events/ContaminatedFood.gd" type="Script" id=21]
+[ext_resource path="res://assets/events/food_contamination.jpg" type="Texture" id=22]
+[ext_resource path="res://events/ShadyBusiness.gd" type="Script" id=23]
+[ext_resource path="res://assets/events/shady_business.jpg" type="Texture" id=24]
+[ext_resource path="res://events/EconomicCollapse.gd" type="Script" id=25]
+[ext_resource path="res://assets/events/economic_collapse.jpg" type="Texture" id=26]
+[ext_resource path="res://events/Uprising.gd" type="Script" id=27]
+[ext_resource path="res://assets/events/uprising.jpg" type="Texture" id=28]
+[ext_resource path="res://events/AgriculturalBreakthrough.gd" type="Script" id=29]
+[ext_resource path="res://assets/events/agricultural_breakthrough.jpg" type="Texture" id=30]
+[ext_resource path="res://events/Festival.gd" type="Script" id=31]
+[ext_resource path="res://assets/events/festival.jpg" type="Texture" id=32]
+[ext_resource path="res://assets/event_se.wav" type="AudioStream" id=33]
+[ext_resource path="res://assets/click.ogg" type="AudioStream" id=34]
+[ext_resource path="res://buffs/PersecutionsBuff.gd" type="Script" id=35]
+[ext_resource path="res://buffs/DoubtBuff.gd" type="Script" id=36]
+[ext_resource path="res://buffs/CorruptionBuff.gd" type="Script" id=37]
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
@@ -10,6 +45,127 @@ script = ExtResource( 1 )
 wait_time = 0.084
 autostart = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 autoplay = true
+
+[node name="EventChime" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 33 )
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 34 )
+
+[node name="PossibleEvents" type="Node" parent="."]
+
+[node name="PlagueDoctor" type="Node" parent="PossibleEvents"]
+script = ExtResource( 3 )
+title = "Plague Doctor Contract"
+description = "A plague doctor wonders into the city, offering his services in exchange for a munificent salary. \"My methods are unusual but effective. As are my rates\". You’re not sure if you can trust him or not"
+picture = ExtResource( 4 )
+
+[node name="ForeignAid" type="Node" parent="PossibleEvents"]
+script = ExtResource( 5 )
+title = "Foreign Aid: Researchers"
+description = "Foreign countries offer their researchers to help find a cure for the plague. They are expensive but will certainly increase research efficiency..."
+picture = ExtResource( 6 )
+
+[node name="Lab" type="Node" parent="PossibleEvents"]
+script = ExtResource( 7 )
+title = "The lab!"
+description = "One of the researchers has gone mad and set the lab on fire. While most of the data was safe, some were damaged to the point of no salvation."
+can_decline = false
+picture = ExtResource( 8 )
+
+[node name="Doomsayer" type="Node" parent="PossibleEvents"]
+script = ExtResource( 9 )
+title = "Doomsayer"
+description = "\"Are we to blame? Is this our punishment?\" One of the residents has started to spread rumors that the Gods are punishing the people and all they can do is await their inevitable doom."
+can_decline = false
+picture = ExtResource( 10 )
+
+[node name="Skepticism" type="Node" parent="PossibleEvents"]
+script = ExtResource( 11 )
+description = "\"Does the city really have our best interests in mind?\" The people grow suspicious of the city's motive. Dissent may be quelled if some of the city's wealth were distributed..."
+picture = ExtResource( 12 )
+
+[node name="Persecutions" type="Node" parent="PossibleEvents"]
+script = ExtResource( 13 )
+title = "Persecutions"
+description = "Some people have started accusing specific demographics as the cause of the plague and have started taking actions into their own hands."
+can_decline = false
+picture = ExtResource( 14 )
+accept_buff = NodePath("../../PossibleBuffs/PersecutionsBuff")
+
+[node name="Doubt" type="Node" parent="PossibleEvents"]
+script = ExtResource( 15 )
+title = "Doubt in the system"
+description = "Some members of the government begin to question the efficiency of the system, causing employees to slack on their tasks."
+can_decline = false
+picture = ExtResource( 16 )
+accept_buff = NodePath("../../PossibleBuffs/DoubtBuff")
+
+[node name="Corruption" type="Node" parent="PossibleEvents"]
+script = ExtResource( 17 )
+title = "Corruption"
+description = "There are rumors that some in the government have been filling their own pockets as \"extra incentive\". An investigation might be needed before things get out of hand."
+picture = ExtResource( 18 )
+
+[node name="ExtremeMeasures" type="Node" parent="PossibleEvents"]
+script = ExtResource( 19 )
+title = "Extreme measures"
+description = "The condition of the city is dreadful. One member of the city council suggests a violent solution. While this act will no doubt come at a hefty price, it will surely solve the current issues at hand…"
+picture = ExtResource( 20 )
+
+[node name="ContaminatedFood" type="Node" parent="PossibleEvents"]
+script = ExtResource( 21 )
+title = "Contaminated food"
+description = "One of your trade partners has found that the food you send to them was contaminated with the virus. They request a refund and refuse to accept food from your city from now."
+picture = ExtResource( 22 )
+
+[node name="ShadyBusiness" type="Node" parent="PossibleEvents"]
+script = ExtResource( 23 )
+title = "Shady Business"
+description = "A merchant comes into the city with a large cargo of rations. He offers them to the city for a suspiciously generous price…"
+picture = ExtResource( 24 )
+
+[node name="EconomicCollapse" type="Node" parent="PossibleEvents"]
+script = ExtResource( 25 )
+title = "Economic Collapse"
+description = "Your city’s treasure is empty. You could ask the people to chip in or forcibly collect taxes from them."
+picture = ExtResource( 26 )
+
+[node name="Uprising" type="Node" parent="PossibleEvents"]
+script = ExtResource( 27 )
+title = "Uprising"
+description = "The people are tired of working on empty stomachs and raid the agricultural district for food."
+can_decline = false
+picture = ExtResource( 28 )
+
+[node name="AgriculturalBreakthrough" type="Node" parent="PossibleEvents"]
+script = ExtResource( 29 )
+title = "Agricultural breakthrough"
+description = "One of the farmers claims to have discovered an innovative way to increase food production. He demands compensation for sharing his knowledge."
+picture = ExtResource( 30 )
+
+[node name="Festival" type="Node" parent="PossibleEvents"]
+script = ExtResource( 31 )
+title = "Festival"
+description = "The head of the food district informs you that people could be fed for 5 days with a full stomach. Perhaps you should throw a festival to raise the spirits of the people."
+picture = ExtResource( 32 )
+
+[node name="CurrentEvents" type="Node" parent="."]
+
+[node name="ExpiredEvents" type="Node" parent="."]
+
+[node name="PossibleBuffs" type="Node" parent="."]
+
+[node name="PersecutionsBuff" type="Node" parent="PossibleBuffs"]
+script = ExtResource( 35 )
+
+[node name="DoubtBuff" type="Node" parent="PossibleBuffs"]
+script = ExtResource( 36 )
+
+[node name="CorruptionBuff" type="Node" parent="PossibleBuffs"]
+script = ExtResource( 37 )
+
+[node name="ActiveBuffs" type="Node" parent="."]

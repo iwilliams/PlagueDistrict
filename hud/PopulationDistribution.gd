@@ -22,17 +22,27 @@ onready var government_slider = get_node("Government/HSlider")
 onready var government_percent_label = get_node("Government/HBoxContainer/Percent")
 onready var government_tmp : float = globals.government_percent
 
-onready var total_label = get_node("HBoxContainer/Total")
+onready var total_label = get_node("HBoxContainer/VBoxContainer/Total")
+onready var cost_label = find_node("Cost")
 
 onready var reset_button = get_node("HBoxContainer/Reset")
 onready var apply_button = get_node("HBoxContainer/Apply")
 
 func _ready():
   reset()
-  reset_button.connect("button_down", self, "reset")
+  reset_button.connect("button_down", self, "reset_click")
   apply_button.connect("button_down", self, "apply")
   for district in globals.districts:
     self[district + "_slider"].connect("value_changed", self, "set_district_tmp", [district])
+  Globals.connect("can_reasing_population_change", self, "toggle_visible")
+  Globals.connect("population_reasign_cost_change", self, "set_buttons_and_total")
+  Globals.connect("money_change", self, "money_changed")
+  
+func toggle_visible() -> void:
+  visible = Globals.can_reasign_population
+
+func money_changed(diff) -> void:
+  set_buttons_and_total()
 
 func set_buttons_and_total():
   var apply_disabled = true
@@ -47,6 +57,13 @@ func set_buttons_and_total():
     total_label.add_color_override("font_color", Color(1, 0, 0))
   else:
     total_label.add_color_override("font_color", Color(1, 1, 1))
+  
+  if Globals.money < Globals.population_reasign_cost:
+    cost_label.add_color_override("font_color", Color(1, 0, 0))
+    apply_button.disabled = true
+  else:
+    cost_label.add_color_override("font_color", Color(1, 1, 1))
+  cost_label.text = str(Globals.population_reasign_cost)
 
 func reset() -> void:
   for district in globals.districts:
@@ -54,9 +71,15 @@ func reset() -> void:
     self[district + "_percent_label"].text = str(globals[district + "_percent"] * 100) + "%"
   set_buttons_and_total()
   
+func reset_click() -> void:
+  reset()
+  Globals.click_sound.play()
+  
 func apply() -> void:
   for district in globals.districts:
     globals[district + "_percent"] = self[district + "_tmp"]
+  Globals.click_sound.play()
+  Globals.money -= Globals.population_reasign_cost
   set_buttons_and_total()
   
 func set_district_tmp(value : float, district : String) -> void:

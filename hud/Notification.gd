@@ -17,8 +17,7 @@ func _ready():
     sign_minus.visible = true
     value.add_color_override("font_color", Color(1.0, 0.0, 0.0))
   animation_player.play("fade")
-  animation_player.connect("animation_finished", self, "remove")
+  var _connection = animation_player.connect("animation_finished", self, "remove")
 
 func remove(_animation_name):
-  print("remove")
   get_parent().remove_child(self)

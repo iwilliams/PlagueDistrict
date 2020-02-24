@@ -1,0 +1,13 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+path="res://.import/government.map-3cd6c67ac08e86369f427ae97de25be2.tres"
+
+[deps]
+
+source_file="res://assets/maps/government.map"
+dest_files=[ "res://.import/government.map-3cd6c67ac08e86369f427ae97de25be2.tres" ]
+
+[params]
+

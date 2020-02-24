@@ -1,0 +1,13 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+path="res://.import/medical.map-da069d00971c6f4a9444f3698a4b45a8.tres"
+
+[deps]
+
+source_file="res://assets/maps/medical.map"
+dest_files=[ "res://.import/medical.map-da069d00971c6f4a9444f3698a4b45a8.tres" ]
+
+[params]
+

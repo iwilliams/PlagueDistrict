@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://districts/MedicalDistrict.tscn" type="PackedScene" id=1]
+[ext_resource path="res://districts/GovernmentDistrict.tscn" type="PackedScene" id=2]
+[ext_resource path="res://default_env.tres" type="Environment" id=3]
+[ext_resource path="res://districts/ResidentialDistrict.tscn" type="PackedScene" id=4]
+[ext_resource path="res://districts/CommerceDistrict.tscn" type="PackedScene" id=5]
+[ext_resource path="res://districts/AgricultureDistrict.tscn" type="PackedScene" id=6]
+
+[node name="Map" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.928174, 0.372145, 0, -0.372145, 0.928174, 0, 16.3836, 24.579 )
+current = true
+fov = 85.0
+
+[node name="MedicalDistrict" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.096903, 0, -0.49052, 0, 0.5, 0, 0.49052, 0, 0.096903, -19.9374, 0.0806446, 11.874 )
+
+[node name="GovernmentDistrict" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.477824, 0, -0.147254, 0, 0.5, 0, 0.147254, 0, 0.477824, -30.3632, 0, -11.7724 )
+
+[node name="ResidentialDistrict" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -22.1531 )
+
+[node name="CommerceDistrict" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.422379, 0, 0.267574, 0, 0.5, 0, -0.267574, 0, 0.422379, 25.7848, 0, -8.29548 )
+
+[node name="AgricultureDistrict" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.345145, 0, 0.361767, 0, 0.5, 0, -0.361767, 0, 0.345145, 17.6742, 0, 13.8899 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 3 )

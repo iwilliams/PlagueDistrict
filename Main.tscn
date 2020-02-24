@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://hud/DaysLabel.gd" type="Script" id=1]
 [ext_resource path="res://districts/ResidentialDistrict.gd" type="Script" id=2]
@@ -10,24 +10,318 @@
 [ext_resource path="res://PercentageBar.gd" type="Script" id=8]
 [ext_resource path="res://font_awesome_font.tres" type="DynamicFont" id=9]
 [ext_resource path="res://hud/PopulationDistribution.tscn" type="PackedScene" id=10]
+[ext_resource path="res://districts/AgricultureDistrict.tscn" type="PackedScene" id=11]
+[ext_resource path="res://default_env.tres" type="Environment" id=12]
+[ext_resource path="res://districts/ResidentialDistrict.tscn" type="PackedScene" id=13]
+[ext_resource path="res://districts/MedicalDistrict.tscn" type="PackedScene" id=14]
+[ext_resource path="res://districts/GovernmentDistrict.tscn" type="PackedScene" id=15]
+[ext_resource path="res://districts/CommerceDistrict.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/events/plague_doctor.jpg" type="Texture" id=17]
+[ext_resource path="res://hud/event_panel.tres" type="StyleBox" id=18]
+[ext_resource path="res://hud/EventPopup.gd" type="Script" id=19]
 
-[node name="Main" type="Node"]
+[sub_resource type="Animation" id=1]
+resource_name = "spin"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
 
-[node name="Map" type="Node2D" parent="."]
+[node name="Main" type="Spatial"]
 
-[node name="ResidentialDistrict" type="Node2D" parent="Map"]
-position = Vector2( 445.608, 82.5664 )
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Status" type="PanelContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+margin_bottom = 30.0
+custom_styles/panel = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Status"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 1022.0
+margin_bottom = 28.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 5
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 5
+
+[node name="StatusContainer" type="HBoxContainer" parent="CanvasLayer/Status/MarginContainer"]
+margin_left = 10.0
+margin_top = 5.0
+margin_right = 1010.0
+margin_bottom = 21.0
+
+[node name="Resources" type="HBoxContainer" parent="CanvasLayer/Status/MarginContainer/StatusContainer"]
+margin_right = 796.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Population" type="HBoxContainer" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources"]
+margin_right = 80.0
+margin_bottom = 16.0
+hint_tooltip = "Population"
+
+[node name="Icon" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Population"]
+margin_right = 20.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 9 )
+text = ""
+valign = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Population"]
+margin_left = 24.0
+margin_right = 80.0
+margin_bottom = 16.0
+size_flags_vertical = 1
+text = "0000000"
+valign = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+resource = "population"
+
+[node name="Money" type="HBoxContainer" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources"]
+margin_left = 95.0
+margin_right = 140.0
+margin_bottom = 16.0
+hint_tooltip = "Money"
+__meta__ = {
+"_editor_description_": "Money"
+}
+
+[node name="Icon" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Money"]
+margin_right = 9.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 9 )
+text = ""
+valign = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Money"]
+margin_left = 13.0
+margin_top = 1.0
+margin_right = 45.0
+margin_bottom = 15.0
+text = "0000"
+script = ExtResource( 3 )
+resource = "money"
+
+[node name="Food" type="HBoxContainer" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources"]
+margin_left = 155.0
+margin_right = 204.0
+margin_bottom = 16.0
+hint_tooltip = "Food"
+__meta__ = {
+"_editor_description_": "Money"
+}
+
+[node name="Icon" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Food"]
+margin_right = 13.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 9 )
+text = ""
+valign = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Food"]
+margin_left = 17.0
+margin_top = 1.0
+margin_right = 49.0
+margin_bottom = 15.0
+text = "0000"
+script = ExtResource( 3 )
+resource = "food"
+
+[node name="Happiness" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources"]
+margin_left = 219.0
+margin_right = 235.0
+margin_bottom = 16.0
+hint_tooltip = "The population is happy"
+mouse_filter = 0
+custom_fonts/font = ExtResource( 9 )
+text = ""
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Infection" type="HBoxContainer" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources"]
+margin_left = 250.0
+margin_right = 515.0
+margin_bottom = 16.0
+hint_tooltip = "Population infection"
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Infection"]
+margin_right = 18.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 9 )
+text = ""
+valign = 1
+
+[node name="Percentage" type="ProgressBar" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Infection"]
+margin_left = 22.0
+margin_right = 265.0
+margin_bottom = 16.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 8 )
+
+[node name="Cure" type="HBoxContainer" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources"]
+margin_left = 530.0
+margin_right = 796.0
+margin_bottom = 16.0
+hint_tooltip = "Population infection"
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Cure"]
+margin_right = 16.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 9 )
+text = ""
+valign = 1
+
+[node name="Percentage" type="ProgressBar" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Cure"]
+margin_left = 20.0
+margin_right = 266.0
+margin_bottom = 16.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 8 )
+type = "cure"
+
+[node name="VBoxContainer" type="HBoxContainer" parent="CanvasLayer/Status/MarginContainer/StatusContainer"]
+visible = false
+margin_left = 338.0
+margin_right = 672.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+
+[node name="Days" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer"]
+margin_left = 800.0
+margin_top = 1.0
+margin_right = 1000.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+text = "Days 1"
+align = 2
+script = ExtResource( 1 )
+
+[node name="EventPopup" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -244.0
+margin_top = -186.5
+margin_right = 244.0
+margin_bottom = 186.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 18 )
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/EventPopup"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 486.0
+margin_bottom = 371.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EventPopup/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 464.0
+margin_bottom = 349.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/EventPopup/MarginContainer/VBoxContainer"]
+margin_right = 444.0
+margin_bottom = 14.0
+text = "Plague Doctor Contract"
+align = 1
+
+[node name="Description" type="Label" parent="CanvasLayer/EventPopup/MarginContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 444.0
+margin_bottom = 89.0
+size_flags_horizontal = 5
+text = "A plague doctor wonders into the city, offering his services in exchange for a munificent salary. \"My methods are unusual but effective. As are my rates\". You’re not sure if you can trust him or not."
+autowrap = true
+
+[node name="Picture" type="TextureRect" parent="CanvasLayer/EventPopup/MarginContainer/VBoxContainer"]
+margin_left = 122.0
+margin_top = 99.0
+margin_right = 322.0
+margin_bottom = 299.0
+size_flags_horizontal = 4
+texture = ExtResource( 17 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/EventPopup/MarginContainer/VBoxContainer"]
+margin_top = 309.0
+margin_right = 444.0
+margin_bottom = 329.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="Accept" type="Button" parent="CanvasLayer/EventPopup/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 97.0
+margin_right = 197.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 100, 0 )
+text = "Accept"
+
+[node name="Decline" type="Button" parent="CanvasLayer/EventPopup/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 247.0
+margin_right = 347.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 100, 0 )
+text = "Decline"
+
+[node name="Map" type="Spatial" parent="."]
+
+[node name="Spatial" type="Spatial" parent="Map"]
+
+[node name="ResidentialDistrict" parent="Map/Spatial" instance=ExtResource( 13 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
 script = ExtResource( 2 )
 
-[node name="Button" type="Button" parent="Map/ResidentialDistrict"]
-margin_right = 12.0
-margin_bottom = 20.0
-text = "Residential"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Popup" type="PopupPanel" parent="Map/ResidentialDistrict"]
+[node name="Popup" type="WindowDialog" parent="Map/Spatial/ResidentialDistrict"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -36,11 +330,9 @@ margin_left = -128.5
 margin_top = -83.5
 margin_right = 128.5
 margin_bottom = 83.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
+window_title = "Residential District"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/ResidentialDistrict/Popup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/Spatial/ResidentialDistrict/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -51,47 +343,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Map/ResidentialDistrict/Popup/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer"]
 margin_right = 249.0
-margin_bottom = 14.0
-text = "Residential District"
-align = 1
+margin_bottom = 68.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/ResidentialDistrict/Popup/VBoxContainer"]
-margin_top = 18.0
-margin_right = 249.0
-margin_bottom = 86.0
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer"]
 margin_right = 122.0
 margin_bottom = 68.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button" type="Button" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 122.0
 margin_bottom = 20.0
 text = "Upgrade"
 
-[node name="Button2" type="Button" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button2" type="Button" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 24.0
 margin_right = 122.0
 margin_bottom = 44.0
 disabled = true
 text = "Upgrade 2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 48.0
 margin_right = 122.0
 margin_bottom = 68.0
 
-[node name="Button" type="Button" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Button" type="Button" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 margin_right = 59.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path1"
 
-[node name="Button2" type="Button" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Button2" type="Button" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 margin_left = 63.0
 margin_right = 122.0
 margin_bottom = 20.0
@@ -99,135 +384,25 @@ size_flags_horizontal = 3
 disabled = true
 text = "Path 2"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer"]
 margin_left = 126.0
 margin_right = 249.0
 margin_bottom = 68.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="Map/Spatial/ResidentialDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_right = 123.0
 margin_bottom = 20.0
 text = "Action"
 
-[node name="ProgressBar" type="ProgressBar" parent="Map/ResidentialDistrict"]
-margin_left = -16.8394
-margin_top = 31.0113
-margin_right = 103.161
-margin_bottom = 54.0113
-value = 30.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Spatial2" type="Spatial" parent="Map"]
+transform = Transform( 0.309017, 0, -0.951057, 0, 1, 0, 0.951057, 0, 0.309017, 0, 0, 0 )
 
-[node name="MedicalDistrict" type="Node2D" parent="Map"]
-position = Vector2( 145.576, 259.28 )
-script = ExtResource( 4 )
-
-[node name="Button" type="Button" parent="Map/MedicalDistrict"]
-margin_right = 12.0
-margin_bottom = 20.0
-text = "Medical"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Popup" type="PopupPanel" parent="Map/MedicalDistrict"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -128.5
-margin_top = -83.5
-margin_right = 128.5
-margin_bottom = 83.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/MedicalDistrict/Popup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Map/MedicalDistrict/Popup/VBoxContainer"]
-margin_right = 249.0
-margin_bottom = 14.0
-text = "Medical District"
-align = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/MedicalDistrict/Popup/VBoxContainer"]
-margin_top = 18.0
-margin_right = 249.0
-margin_bottom = 86.0
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_right = 122.0
-margin_bottom = 68.0
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
-margin_right = 122.0
-margin_bottom = 20.0
-text = "Upgrade"
-
-[node name="Button2" type="Button" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
-margin_top = 24.0
-margin_right = 122.0
-margin_bottom = 44.0
-disabled = true
-text = "Upgrade 2"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
-margin_top = 48.0
-margin_right = 122.0
-margin_bottom = 68.0
-
-[node name="Button" type="Button" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_right = 59.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-disabled = true
-text = "Path1"
-
-[node name="Button2" type="Button" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_left = 63.0
-margin_right = 122.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-disabled = true
-text = "Path 2"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_left = 126.0
-margin_right = 249.0
-margin_bottom = 68.0
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Map/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 123.0
-margin_bottom = 20.0
-text = "Action"
-
-[node name="CommerceDistrict" type="Node2D" parent="Map"]
-position = Vector2( 770.655, 249.048 )
+[node name="CommerceDistrict" parent="Map/Spatial2" instance=ExtResource( 16 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
 script = ExtResource( 5 )
 
-[node name="Button" type="Button" parent="Map/CommerceDistrict"]
-margin_right = 12.0
-margin_bottom = 20.0
-text = "Commerce"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Popup" type="WindowDialog" parent="Map/CommerceDistrict"]
+[node name="Popup" type="WindowDialog" parent="Map/Spatial2/CommerceDistrict"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -239,7 +414,7 @@ margin_bottom = 83.5
 window_title = "Commerce District"
 resizable = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/CommerceDistrict/Popup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/Spatial2/CommerceDistrict/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -250,40 +425,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/CommerceDistrict/Popup/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer"]
 margin_right = 249.0
 margin_bottom = 68.0
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
 margin_right = 122.0
 margin_bottom = 68.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button" type="Button" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 122.0
 margin_bottom = 20.0
 text = "Upgrade"
 
-[node name="Button2" type="Button" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button2" type="Button" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 24.0
 margin_right = 122.0
 margin_bottom = 44.0
 disabled = true
 text = "Upgrade 2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 48.0
 margin_right = 122.0
 margin_bottom = 68.0
 
-[node name="Button" type="Button" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Button" type="Button" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 margin_right = 59.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path1"
 
-[node name="Button2" type="Button" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Button2" type="Button" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 margin_left = 63.0
 margin_right = 122.0
 margin_bottom = 20.0
@@ -291,196 +466,191 @@ size_flags_horizontal = 3
 disabled = true
 text = "Path 2"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer"]
 margin_left = 126.0
 margin_right = 249.0
 margin_bottom = 68.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="Map/Spatial2/CommerceDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_right = 123.0
 margin_bottom = 20.0
 text = "Action"
 
-[node name="AgricultureDistrict" type="Node2D" parent="Map"]
-position = Vector2( 669.13, 475.482 )
+[node name="Spatial3" type="Spatial" parent="Map"]
+transform = Transform( -0.809017, 0, -0.587785, 0, 1, 0, 0.587785, 0, -0.809017, 0, 0, 0 )
+
+[node name="AgricultureDistrict" parent="Map/Spatial3" instance=ExtResource( 11 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
 script = ExtResource( 6 )
 
-[node name="Button" type="Button" parent="Map/AgricultureDistrict"]
-margin_right = 12.0
-margin_bottom = 20.0
-text = "Agriculture"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Popup" type="WindowDialog" parent="Map/AgricultureDistrict"]
+[node name="Popup" type="WindowDialog" parent="Map/Spatial3/AgricultureDistrict"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -261.0
-margin_top = -130.0
-margin_right = 261.0
-margin_bottom = 130.0
+margin_left = -173.5
+margin_top = -128.5
+margin_right = 173.5
+margin_bottom = 128.5
 window_title = "Agriculture District"
-resizable = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Container" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup"]
+[node name="MarginContainer" type="MarginContainer" parent="Map/Spatial3/AgricultureDistrict/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Actions" type="HBoxContainer" parent="Map/AgricultureDistrict/Popup/Container"]
-margin_right = 514.0
-margin_bottom = 252.0
+[node name="Actions" type="HBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 337.0
+margin_bottom = 247.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Upgrades" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions"]
-margin_right = 255.0
+[node name="Upgrades" type="VBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions"]
+visible = false
+margin_right = 252.0
 margin_bottom = 252.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/AgricultureDistrict/Popup/Container/Actions/Upgrades"]
-margin_right = 255.0
+[node name="Button" type="Button" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades"]
+margin_right = 252.0
 margin_bottom = 20.0
 text = "Upgrade"
 
-[node name="Button2" type="Button" parent="Map/AgricultureDistrict/Popup/Container/Actions/Upgrades"]
+[node name="Button2" type="Button" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades"]
 margin_top = 24.0
-margin_right = 255.0
+margin_right = 252.0
 margin_bottom = 44.0
 disabled = true
 text = "Upgrade 2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Upgrades"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades"]
 margin_top = 48.0
-margin_right = 255.0
+margin_right = 252.0
 margin_bottom = 68.0
 
-[node name="Button" type="Button" parent="Map/AgricultureDistrict/Popup/Container/Actions/Upgrades/HBoxContainer"]
-margin_right = 125.0
+[node name="Button" type="Button" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades/HBoxContainer"]
+margin_right = 124.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path1"
 
-[node name="Button2" type="Button" parent="Map/AgricultureDistrict/Popup/Container/Actions/Upgrades/HBoxContainer"]
-margin_left = 129.0
-margin_right = 255.0
+[node name="Button2" type="Button" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Upgrades/HBoxContainer"]
+margin_left = 128.0
+margin_right = 252.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path 2"
 
-[node name="Manage" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions"]
-margin_left = 259.0
-margin_right = 514.0
-margin_bottom = 252.0
+[node name="Manage" type="VBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions"]
+margin_right = 327.0
+margin_bottom = 237.0
 size_flags_horizontal = 3
 
-[node name="Description" type="RichTextLabel" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage"]
-margin_right = 255.0
-margin_bottom = 124.0
+[node name="Description" type="RichTextLabel" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage"]
+margin_right = 327.0
+margin_bottom = 116.0
 size_flags_vertical = 3
 text = "The Agriculture District produces food each day. Assinging more civilians to this district will increase food yield.
 
  You can also manage the population's food rations. 1 food unit will keep 10,000 people happily fed per meal."
 
-[node name="Controls" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage"]
-margin_top = 128.0
-margin_right = 255.0
-margin_bottom = 252.0
+[node name="Controls" type="VBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage"]
+margin_top = 120.0
+margin_right = 327.0
+margin_bottom = 237.0
 size_flags_vertical = 3
 
-[node name="Meals" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls"]
-margin_right = 255.0
-margin_bottom = 60.0
+[node name="Meals" type="VBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls"]
+margin_right = 327.0
+margin_bottom = 56.0
 size_flags_vertical = 3
 
-[node name="MealsLabel" type="Label" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Meals"]
-margin_right = 255.0
+[node name="MealsLabel" type="Label" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Meals"]
+margin_right = 327.0
 margin_bottom = 14.0
 text = "Meals per day: 3"
 
-[node name="HSlider" type="HSlider" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Meals"]
+[node name="HSlider" type="HSlider" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Meals"]
 margin_top = 18.0
-margin_right = 255.0
+margin_right = 327.0
 margin_bottom = 34.0
 max_value = 3.0
 value = 3.0
 tick_count = 4
 ticks_on_borders = true
 
-[node name="Ration" type="VBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls"]
-margin_top = 64.0
-margin_right = 255.0
-margin_bottom = 124.0
+[node name="Ration" type="VBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls"]
+margin_top = 60.0
+margin_right = 327.0
+margin_bottom = 117.0
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration"]
-margin_right = 255.0
+[node name="Label" type="Label" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Ration"]
+margin_right = 327.0
 margin_bottom = 14.0
 text = "1 Food unit feeds:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Ration"]
 margin_top = 18.0
-margin_right = 255.0
+margin_right = 327.0
 margin_bottom = 42.0
 
-[node name="RationRange" type="SpinBox" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration/HBoxContainer"]
-margin_right = 125.0
+[node name="RationRange" type="SpinBox" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Ration/HBoxContainer"]
+margin_right = 161.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 max_value = 1e+08
 value = 10000.0
 allow_greater = true
 
-[node name="Label" type="Label" parent="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration/HBoxContainer"]
-margin_left = 129.0
+[node name="Label" type="Label" parent="Map/Spatial3/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Ration/HBoxContainer"]
+margin_left = 165.0
 margin_top = 5.0
-margin_right = 255.0
+margin_right = 327.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "People"
 
-[node name="GovernmentDistrict" type="Node2D" parent="Map"]
-position = Vector2( 301.829, 475.482 )
-script = ExtResource( 7 )
+[node name="Spatial4" type="Spatial" parent="Map"]
+transform = Transform( -0.809017, 0, 0.587786, 0, 1, 0, -0.587786, 0, -0.809017, 0, 0, 0 )
 
-[node name="Button" type="Button" parent="Map/GovernmentDistrict"]
-margin_right = 12.0
-margin_bottom = 20.0
-text = "Government"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="MedicalDistrict" parent="Map/Spatial4" instance=ExtResource( 14 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
+script = ExtResource( 4 )
 
-[node name="Popup" type="WindowDialog" parent="Map/GovernmentDistrict"]
+[node name="Popup" type="WindowDialog" parent="Map/Spatial4/MedicalDistrict"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = -197.0
-margin_right = 371.0
-margin_bottom = 84.0
-window_title = "Government District"
-resizable = true
+margin_left = -128.5
+margin_top = -83.5
+margin_right = 128.5
+margin_bottom = 83.5
+window_title = "Medical District"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="ScrollContainer" parent="Map/GovernmentDistrict/Popup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/Spatial4/MedicalDistrict/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -491,42 +661,134 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer"]
-margin_right = 491.0
-margin_bottom = 273.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer"]
+margin_right = 249.0
+margin_bottom = 68.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_right = 122.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 122.0
+margin_bottom = 20.0
+text = "Upgrade"
+
+[node name="Button2" type="Button" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 24.0
+margin_right = 122.0
+margin_bottom = 44.0
+disabled = true
+text = "Upgrade 2"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 48.0
+margin_right = 122.0
+margin_bottom = 68.0
+
+[node name="Button" type="Button" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 59.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "Path1"
+
+[node name="Button2" type="Button" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 63.0
+margin_right = 122.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+disabled = true
+text = "Path 2"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 126.0
+margin_right = 249.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Map/Spatial4/MedicalDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 123.0
+margin_bottom = 20.0
+text = "Action"
+
+[node name="Spatial5" type="Spatial" parent="Map"]
+transform = Transform( 0.309017, 0, 0.951056, 0, 1, 0, -0.951056, 0, 0.309017, 0, 0, 0 )
+
+[node name="GovernmentDistrict" parent="Map/Spatial5" instance=ExtResource( 15 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -30 )
+script = ExtResource( 7 )
+
+[node name="Popup" type="WindowDialog" parent="Map/Spatial5/GovernmentDistrict"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -178.0
+margin_top = -158.5
+margin_right = 178.0
+margin_bottom = 158.5
+window_title = "Government District"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="MarginContainer" parent="Map/Spatial5/GovernmentDistrict/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 338.0
+margin_bottom = 299.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
+visible = false
 margin_right = 243.0
 margin_bottom = 273.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button" type="Button" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 243.0
 margin_bottom = 20.0
 text = "Upgrade"
 
-[node name="Button2" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button2" type="Button" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 24.0
 margin_right = 243.0
 margin_bottom = 44.0
 disabled = true
 text = "Upgrade 2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 48.0
 margin_right = 243.0
 margin_bottom = 68.0
 
-[node name="Button" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Button" type="Button" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 margin_right = 119.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "Path1"
 
-[node name="Button2" type="Button" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Button2" type="Button" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 margin_left = 123.0
 margin_right = 243.0
 margin_bottom = 20.0
@@ -534,215 +796,32 @@ size_flags_horizontal = 3
 disabled = true
 text = "Path 2"
 
-[node name="Manage" type="VBoxContainer" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
-margin_left = 247.0
-margin_right = 491.0
-margin_bottom = 273.0
+[node name="Manage" type="VBoxContainer" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer"]
+margin_right = 328.0
+margin_bottom = 289.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Description" type="RichTextLabel" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage"]
-margin_right = 244.0
-margin_bottom = 29.0
+[node name="Description" type="RichTextLabel" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage"]
+margin_right = 328.0
+margin_bottom = 33.0
 size_flags_vertical = 3
 text = "Use the Government District to set what percentage of the population works in each district."
 
-[node name="PopulationDistribution" parent="Map/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage" instance=ExtResource( 10 )]
+[node name="PopulationDistribution" parent="Map/Spatial5/GovernmentDistrict/Popup/VBoxContainer/HBoxContainer/Manage" instance=ExtResource( 10 )]
+margin_top = 37.0
+margin_right = 328.0
+margin_bottom = 289.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
+environment = ExtResource( 12 )
 
-[node name="Status" type="PanelContainer" parent="CanvasLayer"]
-anchor_right = 1.0
-margin_bottom = 30.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Map"]
+autoplay = "spin"
+playback_speed = 0.01
+anims/spin = SubResource( 1 )
 
-[node name="StatusContainer" type="HBoxContainer" parent="CanvasLayer/Status"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1017.0
-margin_bottom = 43.0
-
-[node name="Resources" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer"]
-margin_right = 334.0
-margin_bottom = 36.0
-size_flags_horizontal = 3
-custom_constants/separation = 15
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Population" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/Resources"]
-margin_right = 80.0
-margin_bottom = 36.0
-hint_tooltip = "Population"
-
-[node name="Icon" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Population"]
-margin_right = 20.0
-margin_bottom = 36.0
-size_flags_horizontal = 3
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 9 )
-text = ""
-valign = 1
-
-[node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Population"]
-margin_left = 24.0
-margin_right = 80.0
-margin_bottom = 36.0
-size_flags_vertical = 1
-text = "0000000"
-valign = 1
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-resource = "population"
-
-[node name="Money" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/Resources"]
-margin_left = 95.0
-margin_right = 140.0
-margin_bottom = 36.0
-hint_tooltip = "Money"
-__meta__ = {
-"_editor_description_": "Money"
-}
-
-[node name="Icon" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Money"]
-margin_right = 9.0
-margin_bottom = 36.0
-size_flags_horizontal = 3
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 9 )
-text = ""
-valign = 1
-
-[node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Money"]
-margin_left = 13.0
-margin_top = 11.0
-margin_right = 45.0
-margin_bottom = 25.0
-text = "0000"
-script = ExtResource( 3 )
-resource = "money"
-
-[node name="Food" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/Resources"]
-margin_left = 155.0
-margin_right = 204.0
-margin_bottom = 36.0
-hint_tooltip = "Food"
-__meta__ = {
-"_editor_description_": "Money"
-}
-
-[node name="Icon" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Food"]
-margin_right = 13.0
-margin_bottom = 36.0
-size_flags_horizontal = 3
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 9 )
-text = ""
-valign = 1
-
-[node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources/Food"]
-margin_left = 17.0
-margin_top = 11.0
-margin_right = 49.0
-margin_bottom = 25.0
-text = "0000"
-script = ExtResource( 3 )
-resource = "food"
-
-[node name="Happiness" type="Label" parent="CanvasLayer/Status/StatusContainer/Resources"]
-margin_left = 219.0
-margin_top = 10.0
-margin_right = 235.0
-margin_bottom = 26.0
-hint_tooltip = "The population is happy"
-mouse_filter = 0
-custom_fonts/font = ExtResource( 9 )
-text = ""
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Status/StatusContainer"]
-margin_left = 338.0
-margin_right = 672.0
-margin_bottom = 36.0
-size_flags_horizontal = 3
-
-[node name="Infection" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/VBoxContainer"]
-margin_right = 334.0
-margin_bottom = 16.0
-hint_tooltip = "Population infection"
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/VBoxContainer/Infection"]
-margin_right = 18.0
-margin_bottom = 16.0
-custom_fonts/font = ExtResource( 9 )
-text = ""
-valign = 1
-
-[node name="Percentage" type="ProgressBar" parent="CanvasLayer/Status/StatusContainer/VBoxContainer/Infection"]
-margin_left = 22.0
-margin_right = 334.0
-margin_bottom = 16.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource( 8 )
-
-[node name="Cure" type="HBoxContainer" parent="CanvasLayer/Status/StatusContainer/VBoxContainer"]
-margin_top = 20.0
-margin_right = 334.0
-margin_bottom = 36.0
-hint_tooltip = "Population infection"
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/Status/StatusContainer/VBoxContainer/Cure"]
-margin_right = 16.0
-margin_bottom = 16.0
-custom_fonts/font = ExtResource( 9 )
-text = ""
-valign = 1
-
-[node name="Percentage" type="ProgressBar" parent="CanvasLayer/Status/StatusContainer/VBoxContainer/Cure"]
-margin_left = 20.0
-margin_right = 334.0
-margin_bottom = 16.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource( 8 )
-type = "cure"
-
-[node name="Days" type="Label" parent="CanvasLayer/Status/StatusContainer"]
-margin_left = 676.0
-margin_top = 11.0
-margin_right = 1010.0
-margin_bottom = 25.0
-size_flags_horizontal = 3
-text = "Days 1"
-align = 2
-script = ExtResource( 1 )
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -201.0
-margin_top = -250.0
-custom_constants/margin_right = 10
-custom_constants/margin_bottom = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PopulationDistribution" parent="CanvasLayer/MarginContainer" instance=ExtResource( 10 )]
-margin_right = 191.0
-[connection signal="value_changed" from="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Meals/HSlider" to="Map/AgricultureDistrict" method="_on_meals_slider_value_changed"]
-[connection signal="value_changed" from="Map/AgricultureDistrict/Popup/Container/Actions/Manage/Controls/Ration/HBoxContainer/RationRange" to="Map/AgricultureDistrict" method="_on_RationRange_value_changed"]
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.624384, 0.781117, 0, -0.781117, 0.624384, 0, 22.8073, 24.579 )
+current = true
+fov = 90.0

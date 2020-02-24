@@ -7,6 +7,8 @@ const HOUR_DINNER = 18
 export (int) var meals_per_day = 3
 export (int) var people_per_food_unit_meal = 10000
 
+var max_food_per_day = 3000
+
 func every_hour() -> void:
   if (meals_per_day == 3 && globals.hour == HOUR_BREAKFAST) \
     || (meals_per_day > 0 && globals.hour == 12) \
@@ -14,7 +16,7 @@ func every_hour() -> void:
     globals.food -= int(floor(globals.population/people_per_food_unit_meal))
     
 func every_day() -> void:
-  globals.food += 800
+  globals.food += int(floor(max_food_per_day*globals.agriculture_percent))
 
 func _on_meals_slider_value_changed(value):
   find_node("MealsLabel").text = "Meals per day: " + str(value)

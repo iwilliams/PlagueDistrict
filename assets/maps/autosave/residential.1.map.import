@@ -1,0 +1,13 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+path="res://.import/residential.1.map-1b491f0402f9f8fe3a5af00cbf4b721e.tres"
+
+[deps]
+
+source_file="res://assets/maps/autosave/residential.1.map"
+dest_files=[ "res://.import/residential.1.map-1b491f0402f9f8fe3a5af00cbf4b721e.tres" ]
+
+[params]
+

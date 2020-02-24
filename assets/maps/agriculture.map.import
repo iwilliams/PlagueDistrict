@@ -1,0 +1,13 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+path="res://.import/agriculture.map-d0b60b127dad00717dc1d36ae2db7b83.tres"
+
+[deps]
+
+source_file="res://assets/maps/agriculture.map"
+dest_files=[ "res://.import/agriculture.map-d0b60b127dad00717dc1d36ae2db7b83.tres" ]
+
+[params]
+

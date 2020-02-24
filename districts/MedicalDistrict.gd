@@ -1,4 +1,4 @@
 extends "res://districts/District.gd"
 
 func every_day() -> void:
-  globals.cure_percent += .01
+  Globals.cure_percent += Globals.max_cure_per_day*Globals.medical_percent
