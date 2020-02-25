@@ -4,6 +4,7 @@ class_name Event
 
 export (String) var title : String
 export (String, MULTILINE) var description : String
+export (bool) var can_accept : bool = true
 export (bool) var can_decline : bool = true
 export (Texture) var picture : Texture
 export (NodePath) var accept_buff

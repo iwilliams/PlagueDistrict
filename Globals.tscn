@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Globals.gd" type="Script" id=1]
 [ext_resource path="res://assets/Plaguedistrict_loop.ogg" type="AudioStream" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://buffs/DoubtBuff.gd" type="Script" id=36]
 [ext_resource path="res://buffs/CorruptionBuff.gd" type="Script" id=37]
 [ext_resource path="res://events/Intro.gd" type="Script" id=38]
+[ext_resource path="res://events/LoseEvent.gd" type="Script" id=39]
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
@@ -55,6 +56,18 @@ stream = ExtResource( 33 )
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 34 )
+
+[node name="LoseEvent" type="Node" parent="."]
+script = ExtResource( 39 )
+description = "Everyone is dead, the plague has consumed all. You lose."
+can_accept = false
+can_decline = false
+
+[node name="WinEvent" type="Node" parent="."]
+script = ExtResource( 39 )
+description = "You have found a cure! The city is saved, congratulations!"
+can_accept = false
+can_decline = false
 
 [node name="PossibleEvents" type="Node" parent="."]
 
@@ -148,7 +161,15 @@ title = "Festival"
 description = "The head of the food district informs you that people could be fed for 5 days with a full stomach. Perhaps you should throw a festival to raise the spirits of the people."
 picture = ExtResource( 32 )
 
-[node name="Intro" type="Node" parent="PossibleEvents"]
+[node name="ContaminatedFood" type="Node" parent="PossibleEvents"]
+script = ExtResource( 21 )
+title = "Contaminated food"
+description = "One of your trade partners has found that the food you send to them was contaminated with the virus. They request a refund and refuse to accept food from your city from now."
+picture = ExtResource( 22 )
+
+[node name="CurrentEvents" type="Node" parent="."]
+
+[node name="Intro" type="Node" parent="CurrentEvents"]
 script = ExtResource( 38 )
 title = "Welcome to Plague District"
 description = "The year is 2080 and a new strain of the Black Death has inexplicably surfaced. Your responsibility as mayor is to manage each of the city's five districts and find a cure before the epidemic wipes everyone out.
@@ -157,14 +178,6 @@ Click the Government District (the blue building) and allocate a percentage of t
  
 A word of caution, however.... Even the best-laid plans often go awry."
 can_decline = false
-
-[node name="CurrentEvents" type="Node" parent="."]
-
-[node name="ContaminatedFood" type="Node" parent="CurrentEvents"]
-script = ExtResource( 21 )
-title = "Contaminated food"
-description = "One of your trade partners has found that the food you send to them was contaminated with the virus. They request a refund and refuse to accept food from your city from now."
-picture = ExtResource( 22 )
 
 [node name="ExpiredEvents" type="Node" parent="."]
 

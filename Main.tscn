@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://hud/DaysLabel.gd" type="Script" id=1]
 [ext_resource path="res://districts/ResidentialDistrict.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://hud/EventPopup.gd" type="Script" id=19]
 [ext_resource path="res://Map.gd" type="Script" id=20]
 [ext_resource path="res://hud/FoodExchange.gd" type="Script" id=21]
+[ext_resource path="res://hud/Moral.gd" type="Script" id=22]
 
 [sub_resource type="Animation" id=1]
 resource_name = "spin"
@@ -156,15 +157,58 @@ text = "0000"
 script = ExtResource( 3 )
 resource = "food"
 
-[node name="Happiness" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources"]
+[node name="Moral" type="CenterContainer" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources"]
 margin_left = 219.0
 margin_right = 235.0
 margin_bottom = 16.0
+script = ExtResource( 22 )
+
+[node name="Happy" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Moral"]
+visible = false
+margin_right = 16.0
+margin_bottom = 16.0
 hint_tooltip = "The population is happy"
-mouse_filter = 0
+mouse_filter = 1
 custom_fonts/font = ExtResource( 9 )
 text = ""
 __meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Normal" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Moral"]
+margin_right = 16.0
+margin_bottom = 16.0
+mouse_filter = 1
+custom_fonts/font = ExtResource( 9 )
+text = ""
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Sad" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Moral"]
+visible = false
+margin_right = 16.0
+margin_bottom = 16.0
+hint_tooltip = "The population is happy"
+mouse_filter = 1
+custom_fonts/font = ExtResource( 9 )
+text = ""
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Despair" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Moral"]
+visible = false
+margin_right = 16.0
+margin_bottom = 16.0
+mouse_filter = 1
+custom_fonts/font = ExtResource( 9 )
+text = ""
+__meta__ = {
+"_edit_use_anchors_": false,
 "_editor_description_": ""
 }
 
@@ -172,7 +216,7 @@ __meta__ = {
 margin_left = 250.0
 margin_right = 515.0
 margin_bottom = 16.0
-hint_tooltip = "Population infection"
+hint_tooltip = "Percentage of infected population"
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Infection"]
@@ -195,7 +239,7 @@ script = ExtResource( 8 )
 margin_left = 530.0
 margin_right = 796.0
 margin_bottom = 16.0
-hint_tooltip = "Population infection"
+hint_tooltip = "Cure research progress"
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/Status/MarginContainer/StatusContainer/Resources/Cure"]
@@ -234,7 +278,6 @@ align = 2
 script = ExtResource( 1 )
 
 [node name="EventPopup" type="PanelContainer" parent="CanvasLayer"]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -284,6 +327,7 @@ margin_right = 444.0
 margin_bottom = 89.0
 size_flags_horizontal = 5
 text = "A plague doctor wonders into the city, offering his services in exchange for a munificent salary. \"My methods are unusual but effective. As are my rates\". You’re not sure if you can trust him or not."
+align = 1
 autowrap = true
 
 [node name="Picture" type="TextureRect" parent="CanvasLayer/EventPopup/MarginContainer/VBoxContainer"]
@@ -675,7 +719,7 @@ margin_right = 327.0
 margin_bottom = 14.0
 text = "Meals per day: 3"
 
-[node name="HSlider" type="HSlider" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Meals"]
+[node name="MealsSlider" type="HSlider" parent="Map/Agriculture/AgricultureDistrict/Popup/MarginContainer/Actions/Manage/Controls/Meals"]
 margin_top = 18.0
 margin_right = 327.0
 margin_bottom = 34.0

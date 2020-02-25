@@ -3,7 +3,7 @@ extends Event
 export (int) var cost = 1000
 
 func enabled_get():
-  return Globals.food <= 1000
+  return Globals.food <= 200
 
 func accept():
   Globals.food += 1000

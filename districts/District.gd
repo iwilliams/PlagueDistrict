@@ -6,7 +6,6 @@ onready var popup : Popup = get_node("Popup")
 
 func _ready():
   #warning-ignore:return_value_discarded
-#  button.connect("button_down", popup, "popup")
   button.connect("input_event", self, "clicked")
   globals.connect("every_minute", self, "every_minute")
   globals.connect("every_hour", self, "every_hour")
@@ -14,6 +13,8 @@ func _ready():
   globals.connect("event", self, "close_popup")
 
 func clicked(camera: Node, event: InputEvent, click_position, click_normal, shape_idx) -> void:
+  if Globals.current_event:
+    return
   if event is InputEventMouse:
     if event is InputEventMouseButton:
         if event.is_action_pressed('mouse_lmb'):

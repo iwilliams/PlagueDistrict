@@ -24,6 +24,8 @@ func population_set(value: int) -> void:
   if diff != 0:
     emit_signal("population_change", diff)
   population = int(max(value, 0))
+  if population == 0:
+    end_game()
   
 var infected_population : int = int(population * .02) setget infected_population_set
 func infected_population_set(value : int) -> void:
@@ -31,26 +33,28 @@ func infected_population_set(value : int) -> void:
 
 var infection_percent : float setget, infection_percent_get
 func infection_percent_get() -> float:
+  if population == 0:
+    return 1.0
   return float(infected_population)/float(population)
   
-var food : int = 3600 setget food_set
+var food : int = 1600 setget food_set
 func food_set(value: int) -> void:
   value = int(max(value, 0))
   var diff := value - food
+  food = value
   if diff != 0:
     emit_signal("food_change", diff)
-  food = value
-  
+
 var money : int = 1000 setget money_set
 func money_set(value: int) -> void:
   value = int(max(value, 0))
   var diff := value - money
+  money = value
   if diff != 0:
     emit_signal("money_change", diff)
-  money = value
 
-var mortality_rate : float = .10
-var transfer_rate : float = .25
+var mortality_rate : float = .20
+var transfer_rate : float = .30
 
 var max_cure_per_day : float = 0.07 setget max_cure_per_day_set
 func max_cure_per_day_set(value: float):
@@ -59,6 +63,8 @@ func max_cure_per_day_set(value: float):
 var cure_percent : float = 0.0 setget cure_percent_set
 func cure_percent_set(value) -> void:
   cure_percent = clamp(value, 0, 1.0)
+  if cure_percent == 1.0:
+    win_game()
 
 const MORAL_HAPPY := 2.0
 const MORAL_NORMAL := 1.0
@@ -98,12 +104,12 @@ func population_reasign_cost_set(value):
   population_reasign_cost = max(0, value)
   emit_signal("population_reasign_cost_change")
 
-var cost_of_money_in_food := 100 setget cost_of_money_in_food_set
+var cost_of_money_in_food := 1000 setget cost_of_money_in_food_set
 func cost_of_money_in_food_set(value : int) -> void:
   cost_of_money_in_food = value
   emit_signal("cost_of_money_in_food_change")
 
-var cost_of_food_in_money := 100 setget cost_of_food_in_money_set
+var cost_of_food_in_money := 1000 setget cost_of_food_in_money_set
 func cost_of_food_in_money_set(value : int) -> void:
   cost_of_food_in_money = value
   emit_signal("cost_of_food_in_money_change")
@@ -241,3 +247,26 @@ func event_decline() -> bool:
     return true
   else:
     return false
+
+func end_game():
+  pause()
+  for n in current_events.get_children():
+    current_events.remove_child(n)
+  for n in possible_events.get_children():
+    possible_events.remove_child(n)
+  var lose_event = $LoseEvent
+  remove_child(lose_event)
+  possible_events.add_child(lose_event)
+  get_event()
+  
+func win_game():
+  pause()
+  for n in current_events.get_children():
+    current_events.remove_child(n)
+  for n in possible_events.get_children():
+    possible_events.remove_child(n)
+  var win_event = $WinEvent
+  remove_child(win_event)
+  possible_events.add_child(win_event)
+  get_event()
+  

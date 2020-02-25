@@ -18,9 +18,14 @@ func event(event : Event) -> void:
   title.text = event.title
   description.text = event.description
   picture.texture = event.picture
+  accept_button.visible = event.can_accept
   decline_button.visible = event.can_decline
   Globals.pause()
   visible = true
+  anchor_top = .5
+  anchor_right = .5
+  anchor_bottom = .5
+  anchor_left = .5
   
 func accept():
   Globals.click_sound.play()
