@@ -53,8 +53,8 @@ func money_set(value: int) -> void:
   if diff != 0:
     emit_signal("money_change", diff)
 
-var mortality_rate : float = .20
-var transfer_rate : float = .30
+var mortality_rate : float = .15
+var transfer_rate : float = .4
 
 var max_cure_per_day : float = 0.07 setget max_cure_per_day_set
 func max_cure_per_day_set(value: float):
